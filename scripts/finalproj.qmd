@@ -232,18 +232,27 @@ trauma_hist
 ```
 
 # Plot 1
+
 ```{r, plot-1}
 
 #Mental Health Efficacy by School Type
 
 table(final_data$school_type)
 #There are 5 answer options here. 4 people selected two options. Need to decide how to clean this. 
+
+#@suzie - for "Public school,Charter school" answers, let's rename this to be "Charter school" to fit with the other Charter school answers 
+
+#@suzie let's keep dual language as public (so remane "Public school,Other" to "Public School")
+
 table(final_data$school_type_other)
 #Two people wrote in answers. Again need to decide how to clean this. 
 
+# let's rename "Choice School" to "Public School" - we will make a note in the paper that we #had a dual language and choice school 
+
+#@suzie, mean_mhl_id is the variable for SMH-SETS
 
 #final_data %>%
-  #ggplot(aes(school_type, **mental health efficacy measure here**) +
+  #ggplot(aes(school_type, mean_mhl_id) +
 #geom_*** +
 #theme
 
