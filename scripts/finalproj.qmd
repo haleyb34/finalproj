@@ -259,6 +259,21 @@ table(final_data$school_type_other)
 
 ```
 
+# Plot 3
+
+```{r}
+#Research question 3: is there a relationship between teacher mental health efficacy and burnout? X = mental health efficacy, Y = burnout, scatter plot + line
+
+final_data %>%
+  ggplot(aes(mean_mhl_id, sum_burnout)) +
+  geom_point() +
+  geom_smooth() +
+  ggtitle("Teacher Burnout by Mental Health Efficacy") +
+  xlab("Mental Health Efficacy") +
+  ylab("Burnout")+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
 Research Questions (as reference)
 
 1.  Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
