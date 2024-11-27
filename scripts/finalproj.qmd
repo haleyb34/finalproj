@@ -31,6 +31,7 @@ library(mdsr)
 library(here)
 library(ggplot2)
 library(dplyr)
+library(ggridges)
 
 ##All but nlme has been cited in the .bib document. If any more packages get used will need to add citation. -Suzie
 ```
@@ -236,26 +237,32 @@ trauma_hist
 ```{r, plot-1}
 
 #Mental Health Efficacy by School Type
+#Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
 
-table(final_data$school_type)
-#There are 5 answer options here. 4 people selected two options. Need to decide how to clean this. 
+#There are 4 answer options on this question (Elementary, K-8, Middle, and High School), plus an other option.  
+table(final_data$school_level)
 
-#@suzie - for "Public school,Charter school" answers, let's rename this to be "Charter school" to fit with the other Charter school answers 
 
-#@suzie let's keep dual language as public (so remane "Public school,Other" to "Public School")
+#Six people wrote in answers. 4 said K-12, 1 said 6-8 school, and 1 said middle and high school. We could create a new category for K-12. I would feel comfortable putting the 6-8 person in the middle school category, and not sure what we'd want to do for the middle and high school. For now, I'm not going to include the "Other" option in the plot. 
+table(final_data$school_level_other)
 
-table(final_data$school_type_other)
-#Two people wrote in answers. Again need to decide how to clean this. 
+##I would like to rearrange the y-axis to be in order of level: Elementary, K-8, Middle, then High School. If you know how to do that, let me know! -Suzie
 
-# let's rename "Choice School" to "Public School" - we will make a note in the paper that we #had a dual language and choice school 
+##Also there is one N/A for the mean mhl score, wondering if I need to add a na.rm somewhere? Lastly, I am getting a warning and I'm guessing that's what it's from. 
 
-#@suzie, mean_mhl_id is the variable for SMH-SETS
-
-#final_data %>%
-  #ggplot(aes(school_type, mean_mhl_id) +
-#geom_*** +
-#theme
-
+plot1 <- final_data %>%
+  filter(school_level != "Other (Please Specify)") %>%
+  select(school_level, mean_mhl_id) %>%
+  ggplot(aes(x = mean_mhl_id, y= school_level)) +
+  geom_density_ridges(fill = "lightblue", alpha = .7) +
+  labs(x= "Mental Health Efficacy Score",
+       y= "School Level",
+       title = "Figure 1",
+       subtitle = "Teacher Mental Health Efficacy by School Level") +
+  theme_get()
+  
+         
+plot1
 
 ```
 
