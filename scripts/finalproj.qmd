@@ -203,7 +203,8 @@ final_data <- final_data %>%
 final_data <- final_data %>%
   mutate(sum_sectrauma = pro_2 + pro_5 + pro_7 + pro_9 + pro_11 + pro_13 + pro_14 + pro_23 + pro_25 + pro_28)
 
-###here as well. Good job on the summary. How about combining them together?
+### Comment: here as well. Good job on the summary. How about combining them together?
+
 # Summation for scales
 final_data <- final_data %>%
   mutate(
