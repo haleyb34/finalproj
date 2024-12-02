@@ -35,6 +35,8 @@ library(dplyr)
 ##All but nlme has been cited in the .bib document. If any more packages get used will need to add citation. -Suzie
 ```
 
+## Comment: I have learned about *Lahman* package from you, thanks.
+
 ## 2. Read Data
 
 ```{r}
@@ -167,6 +169,19 @@ final_data <- final_data %>%
     `4` = "2",
     `5` = "1")))
 
+### Comment: I love the way you coded reveresely. But have you thought about encapsulating the reversal logic in a reusable function and apply it dynamically:
+
+# Function to reverse scores
+reverse_scores <- function(data, vars) {
+  data %>%
+    mutate(across(all_of(vars), ~ as.numeric(recode(.,
+      `1` = "5", `2` = "4", `3` = "3", `4` = "2", `5` = "1"
+    ))))
+}
+
+# Reverse specific items
+final_data <- reverse_scores(final_data, c("pro_1", "pro_2", "pro_15", "pro_17", "pro_29"))
+
 #Step 2 Compassion Satisfaction
 
 #add scores on 3, 6, 12, 16, 18, 20, 22, 24, 27, 30
@@ -187,6 +202,15 @@ final_data <- final_data %>%
 
 final_data <- final_data %>%
   mutate(sum_sectrauma = pro_2 + pro_5 + pro_7 + pro_9 + pro_11 + pro_13 + pro_14 + pro_23 + pro_25 + pro_28)
+
+###here as well. Good job on the summary. How about combining them together?
+# Summation for scales
+final_data <- final_data %>%
+  mutate(
+    sum_comp_satis = rowSums(across(c("pro_3", "pro_6", "pro_12", "pro_16", "pro_18", "pro_20", "pro_22", "pro_24", "pro_27", "pro_30")), na.rm = TRUE),
+    sum_burnout = rowSums(across(c("pro_1", "pro_4", "pro_8", "pro_10", "pro_15", "pro_17", "pro_19", "pro_21", "pro_26", "pro_29")), na.rm = TRUE),
+    sum_sectrauma = rowSums(across(c("pro_2", "pro_5", "pro_7", "pro_9", "pro_11", "pro_13", "pro_14", "pro_23", "pro_25", "pro_28")), na.rm = TRUE)
+  )
 
 #step 5 frequency table and histogram for compassion
 
@@ -272,6 +296,25 @@ final_data %>%
   xlab("Mental Health Efficacy") +
   ylab("Burnout")+
   theme(plot.title = element_text(hjust = 0.5))
+
+
+### Comment: I love the way you guys adjust the element text. I learned a new thing about ggplot! I have tried the next plot code, hope you like it. 
+
+final_data %>%
+  ggplot(aes(x = mean_mhl_id, y = sum_burnout)) +
+  geom_point(alpha = 0.7, color = "blue", size = 2) +  # Add transparency and color
+  geom_smooth(method = "lm", se = TRUE, color = "red") +  # Explicit method for trend line
+  ggtitle("Teacher Burnout by Mental Health Efficacy") +
+  xlab("Mental Health Efficacy Score") +
+  ylab("Burnout Level") +
+  theme_minimal() +  # Use a clean theme
+  theme(
+    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),  # Enhance title
+    axis.title = element_text(size = 12),  # Customize axis labels
+    axis.text = element_text(size = 10)  # Adjust axis tick text size
+  )
+
+
 ```
 
 Research Questions (as reference)
