@@ -256,6 +256,14 @@ table(final_data$school_type_other)
 #geom_*** +
 #theme
 
+final_data %>%
+    #mutate(school_level = factor(school_level, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
+  ggplot() +
+  geom_violin(aes(y = mean_mhl_id, x = school_level)) +
+  ggtitle("Teacher Mental Health Efficacy \n by Years of Teaching Experience") +
+  xlab("Years of Experience") +
+  ylab("Mental Health Efficacy") +
+  theme_minimal()
 
 ```
 
@@ -304,7 +312,7 @@ final_data %>%
 
 Research Questions (as reference)
 
-1.  Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
+1.  Do teacher reports of mental health efficacy differ by school level (i.e., elementary, middle, high school)? 
 
 2.  Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?
 
