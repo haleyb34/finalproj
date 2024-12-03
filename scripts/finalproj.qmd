@@ -13,14 +13,17 @@ bibliography: references.bib
 link-citations: true
 execute: 
   eval: true
-  echo: true
+  echo: false # consider edit as echo: false so that it won't show the code in the file as requested in the rubric. If if it was for team communication, I like the idea that using code-fold in the YAML.
+  warning: false
+  message: false # added warning and message: false
 ---
 
 # Code
 
 ## 1. Load Packages
 
-```{r}
+```{r include=FALSE} 
+# I would leave this out using include = FALSE to keep the file clean. Love loading all packages in one chunk.
 
 library(Lahman)
 library(nlme)
@@ -66,9 +69,10 @@ data <- data %>%
     "11-15 years" = "11+ years",
     "More than 15 years" = "11+ years",
     .default ="Unknown"  # Change as necessary for unmatched values
-  ))
+  )) %>% 
+  select(id, yrs_combine, everything()) # Use select to order columns
 
-data
+data # I would remove this as it will show in the file. 
 ```
 
 ### b. Measure Cleaning
@@ -106,7 +110,8 @@ final_data <- pro_data_recode %>%
 
 
 final_data<- final_data %>%
-  mutate(mean_mhl_id = ((mhl_1 + mhl_2 + mhl_3 + mhl_4 + mhl_5 + mhl_6 + mhl_7 + mhl_8 + mhl_9 + mhl_10 + mhl_11 + mhl_11 + mhl_12 + mhl_13 + mhl_14 + mhl_15)/15))
+  mutate(mean_mhl_id = ((mhl_1 + mhl_2 + mhl_3 + mhl_4 + mhl_5 + mhl_6 + mhl_7 + mhl_8 + mhl_9 + mhl_10 + mhl_11 + mhl_11 + mhl_12 + mhl_13 + mhl_14 + mhl_15)/15)) %>% 
+  select(id, yrs_combine, mean_mhl_id, everything())
 
 final_data
 ```
@@ -193,8 +198,15 @@ final_data <- final_data %>%
 frequency_table <- final_data %>%
   count(sum_comp_satis) %>%
   arrange(desc(n))
-frequency_table
-print(frequency_table)
+
+frequency_table %>% 
+  kableExtra::kable(caption = "Table 1 Compassion",
+                    booktabs = TRUE,
+                    col.names = c('Compassion', 'Frequency'),
+                    align = "c") 
+# If the intention was to insert a table at here, kable() can help to edit the table and col names
+
+print(frequency_table) # can leave this out of the code
 
 
 comp_hist <- ggplot(final_data, aes(x=sum_comp_satis)) +
@@ -207,9 +219,15 @@ comp_hist
 frequency_table_2 <- final_data %>%
   count(sum_burnout) %>%
   arrange(desc(n))
-frequency_table_2
-print(frequency_table_2)
 
+frequency_table_2 %>% 
+  kableExtra::kable(caption = "Table 2 Burnout",
+                    booktabs = TRUE,
+                    col.names = c('Burnout', 'Frequency'),
+                    align = "c")
+# Use kable at here, hope it would help
+
+print(frequency_table_2)
 
 burnout_hist <- ggplot(final_data, aes(x=sum_burnout)) +
   geom_histogram()
