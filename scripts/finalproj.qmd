@@ -264,15 +264,24 @@ table(final_data$school_type_other)
 ```{r}
 #Research question 2: Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?
 
+#I think this script made it so the bar plot's y axis was frequency or sum or something
+#final_data %>%
+   # mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
+ # ggplot() +
+ # geom_col(aes(y = mean_mhl_id, x = yrs_combine)) +
+ # ggtitle("Mean Teacher Mental Health Efficacy \n by Years of Teaching Experience") +
+ # xlab("Years of Experience") +
+ # ylab("Mental Health Efficacy") +
+ # theme_minimal()
+
 final_data %>%
     mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
   ggplot() +
-  geom_col(aes(y = mean_mhl_id, x = yrs_combine)) +
-  ggtitle("Teacher Mental Health Efficacy by Years of Teching Experience") +
+  geom_boxplot(aes(y = mean_mhl_id, x = yrs_combine)) +
+  ggtitle("Teacher Mental Health Efficacy \n by Years of Teaching Experience") +
   xlab("Years of Experience") +
-  ylab("Mental Health Efficacy")
-
-
+  ylab("Mental Health Efficacy") +
+  theme_minimal()
   
 
 
