@@ -47,6 +47,17 @@ data <- import(here("data", "finalproj.csv")) %>%
 ### a. Demographics/Characteristics
 
 ```{r}
+## Peer Review: I think starting with selecting demographic-relevant columns from the original dataset, and then using mutate() and recode() for specific adjustments, could enhance readability! An example is below; data_demo - Nakyung
+
+data_demo <- data %>% 
+  select(gender, age, yrs_teach) %>% 
+  mutate(yrs_combine = recode(yrs_teach, 
+    "0-1 years" = "0-5 years",
+    "2-5 years" = "0-5 years",
+    "6-10 years" = "6-10 years",
+    "11-15 years" = "11+ years",
+    "More than 15 years" = "11+ years",
+    .default ="Unknown"))
 
 data$gender <- as.factor(data$gender)
 data$gender
@@ -76,6 +87,9 @@ data
 #### i. Emotional Regulation Questionnaire (ERQ)
 
 ```{r}
+
+## Peer Review: I love how you recoded agreement level responses from words to numbers. Selecting columns using starts_with(“er”) is very clever, given that this dimension has 10 columns! - Nakyung
+
 erq_data_recode <- data %>%
   mutate(across(starts_with("er"), ~ case_when(.== "Strongly disagree" ~ 1,
                                                .=="Disagree" ~ 2,
@@ -169,6 +183,8 @@ final_data <- final_data %>%
 
 #Step 2 Compassion Satisfaction
 
+## Peer Review: I really like how you created categories of ‘compassion’, ‘burnout’, and ‘secondary traumatic stress’ from the pro columns. Selecting relevant columns and using sum() is a great idea! - Nakyung
+
 #add scores on 3, 6, 12, 16, 18, 20, 22, 24, 27, 30
 
 final_data <- final_data %>%
@@ -196,6 +212,7 @@ frequency_table <- final_data %>%
 frequency_table
 print(frequency_table)
 
+## Peer Review: Using geom_histogram() to visually display the frequency the response values is really great. Readers can get a clear sense of it at a glance. - Nakyung
 
 comp_hist <- ggplot(final_data, aes(x=sum_comp_satis)) +
   geom_histogram()
@@ -263,6 +280,8 @@ table(final_data$school_type_other)
 
 ```{r}
 #Research question 3: is there a relationship between teacher mental health efficacy and burnout? X = mental health efficacy, Y = burnout, scatter plot + line
+
+## Peer Review: I learned of xlab(" ") and ylab(" ") functions! I always used lab(x = " ", y = " ") but xlab() or ylab() look very convenient! - Nakyung
 
 final_data %>%
   ggplot(aes(mean_mhl_id, sum_burnout)) +
