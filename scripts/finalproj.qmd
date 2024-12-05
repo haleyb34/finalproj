@@ -21,7 +21,7 @@ execute:
 ## 1. Load Packages
 
 ```{r}
-
+ 
 library(Lahman)
 library(nlme)
 library(janitor)
