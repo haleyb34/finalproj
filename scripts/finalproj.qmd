@@ -1,4 +1,4 @@
----
+--
 title: "Final Project"
 author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke"
 format: 
@@ -32,6 +32,7 @@ library(here)
 library(ggplot2)
 library(dplyr)
 library(ggridges)
+library(modelsummary)
 
 ##All but nlme has been cited in the .bib document. If any more packages get used will need to add citation. -Suzie
 ```
@@ -269,20 +270,43 @@ plot1
 #geom_*** +
 #theme
 
-final_data %>%
+final_data <- final_data %>%
     mutate(school_level= fct_collapse(school_level, 
         "Multiple Levels" = c("Other (Please Specify)", "K-8"),
         "Elementary School" = c("Elementary School"),
         "Middle School" = c("Middle School"),
-        "High School" = c("High School")
-  )) %>%
-  ggplot() +
-  geom_violin(aes(y = mean_mhl_id, x = school_level)) +
+        "High School" = c("High School"))) 
+
+ggplotrq1 <- final_data %>%
+  ggplot(aes(y = mean_mhl_id, x = school_level, color = school_level, fill = school_level)) +
+  geom_violin() +
+  stat_summary(fun="median",
+               geom = "crossbar",
+               width = 0.5,
+               colour = "red") +
   ggtitle("Teacher Mental Health Efficacy \n by School Level") +
   xlab("Years of Experience") +
   ylab("Mental Health Efficacy") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+ggplotrq1
+
+final_data$school_level <- factor(final_data$school_level, levels = c("Elementary School", "Middle School", "High School", "Multiple Levels"))
+
+fit1 <- lm(mean_mhl_id ~ school_level, data=final_data)
+anova(fit1)
+
+modelsummary(fit1, 
+             stars=T,
+             fmt=2,
+             vcov = "robust",
+             gof_omit = "Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err",
+             coef_rename = c("school_levelMiddle School" = "Middle School",
+                             "school_levelHigh School" = "High School",
+                             "school_levelMultiple Levels" = "Multiple Levels"),
+title = "Table ##. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers",
+notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one district."))
 
 ```
 
@@ -291,8 +315,9 @@ final_data %>%
 ```{r}
 #Research question 2: Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?
 
-final_data %>%
-    mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
+  
+ggplotrq2 <- final_data %>%
+  mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
   ggplot() +
   geom_boxplot(aes(y = mean_mhl_id, x = yrs_combine)) +
   ggtitle("Teacher Mental Health Efficacy \n by Years of Teaching Experience") +
@@ -300,7 +325,24 @@ final_data %>%
   ylab("Mental Health Efficacy") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
+
+ggplotrq2
   
+#OLS 
+
+final_data$yrs_combine <- factor(final_data$yrs_combine, levels = c("11+ years", "0-5 years", "6-10 years"))
+
+fit2 <- lm(mean_mhl_id ~ yrs_combine, data=final_data)
+
+modelsummary(fit2, 
+             stars=T,
+             fmt=2,
+             vcov = "robust",
+             gof_omit = "Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err",
+             coef_rename = c("yrs_combine0-5 years" = "0-5 years",
+                             "yrs_combine6-10 years" = "6-10 years"),
+title = "Table ##. Ordinary Least Squares estimates of the relationship between the years of experience and average MHSE for Oregon teachers",
+notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 
 
 ```
@@ -310,7 +352,7 @@ final_data %>%
 ```{r}
 #Research question 3: is there a relationship between teacher mental health efficacy and burnout? X = mental health efficacy, Y = burnout, scatter plot + line
 
-final_data %>%
+ggplotrq3 <- final_data %>%
   ggplot(aes(mean_mhl_id, sum_burnout)) +
   geom_point() +
   geom_smooth() +
@@ -318,6 +360,20 @@ final_data %>%
   xlab("Mental Health Efficacy") +
   ylab("Burnout")+
   theme(plot.title = element_text(hjust = 0.5))
+
+ggplotrq3
+
+#OLS 
+
+fit3 <- lm(sum_burnout ~ mean_mhl_id + school_level + yrs_combine + current_class, data=final_data)
+
+modelsummary(fit3, 
+             stars=T,
+             fmt=2,
+             vcov = "robust",
+             gof_omit = "Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err",
+title = "Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers",
+notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 ```
 
 Research Questions (as reference)
