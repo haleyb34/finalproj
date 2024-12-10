@@ -1,20 +1,20 @@
---
-title: "Final Project"
-author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke"
-format: 
-  html:
-    toc: true
-    toc-depth: 5
-    toc-title: "Table of Contents"
-    code-fold: true
-    code-summary: "Show the code"
-editor: visual
-bibliography: references.bib
-link-citations: true
-execute: 
-  eval: true
-  echo: true
----
+|                                                                     |
+|---------------------------------------------------------------------|
+| title: "Final Project"                                              |
+| author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke" |
+| format:                                                             |
+| html:                                                               |
+| toc: true                                                           |
+| toc-depth: 5                                                        |
+| toc-title: "Table of Contents"                                      |
+| code-fold: true                                                     |
+| code-summary: "Show the code"                                       |
+| editor: visual                                                      |
+| bibliography: references.bib                                        |
+| link-citations: true                                                |
+| execute:                                                            |
+| eval: true                                                          |
+| echo: true                                                          |
 
 # Code
 
@@ -256,10 +256,10 @@ plot1 <- final_data %>%
   select(school_level, mean_mhl_id) %>%
   ggplot(aes(x = mean_mhl_id, y= school_level)) +
   geom_density_ridges(fill = "lightblue", alpha = .7) +
-  labs(x= "Mental Health Efficacy Score",
+  labs(x= "Mental Health  Self-Efficacy Score",
        y= "School Level",
        title = "Figure 1",
-       subtitle = "Teacher Mental Health Efficacy by School Level") +
+       subtitle = "Teacher Mental Health Self-Efficacy by School Level") +
   theme_get()
   
          
@@ -284,7 +284,7 @@ ggplotrq1 <- final_data %>%
                geom = "crossbar",
                width = 0.5,
                colour = "red") +
-  ggtitle("Teacher Mental Health Efficacy \n by School Level") +
+  ggtitle("Teacher Mental Health Self-Efficacy \n by School Level") +
   xlab("Years of Experience") +
   ylab("Mental Health Efficacy") +
   theme_minimal() +
@@ -320,9 +320,9 @@ ggplotrq2 <- final_data %>%
   mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
   ggplot() +
   geom_boxplot(aes(y = mean_mhl_id, x = yrs_combine)) +
-  ggtitle("Teacher Mental Health Efficacy \n by Years of Teaching Experience") +
+  ggtitle("Teacher Mental Health Self-Efficacy \n by Years of Teaching Experience") +
   xlab("Years of Experience") +
-  ylab("Mental Health Efficacy") +
+  ylab("Mental Health Self-Efficacy") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -356,8 +356,8 @@ ggplotrq3 <- final_data %>%
   ggplot(aes(mean_mhl_id, sum_burnout)) +
   geom_point() +
   geom_smooth() +
-  ggtitle("Teacher Burnout by Mental Health Efficacy") +
-  xlab("Mental Health Efficacy") +
+  ggtitle("Teacher Burnout by Mental Health Self-Efficacy") +
+  xlab("Mental Health Self-Efficacy") +
   ylab("Burnout")+
   theme(plot.title = element_text(hjust = 0.5))
 
