@@ -3,7 +3,7 @@ title: "Final Project"
 subtitle: "EDLD 651"
 author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke" 
 date: "December 11, 2024"
-abstract: "In the K-12 school system, there is an increasing need to support student mental health, and teacher well-being. Despite being tasked with playing a larger role in social-emotional well-being, little research has examined how confident teachers are in their ability to support student mental health, or the factors that are associated with these abilities. To address this gap, we examined how teacher mental health self-efficacy varied by grades taught, if mental health self-efficacy differed based on years of teaching experience, and if mental health self-efficacy was associated with teacher burnout. To do this, we analyzed teacher self-report data for 92 Oregon teachers. We found no relation between mental health self efficacy and school level, years of experience, or burnout. Implications of these null findings are discussed."
+abstract: "In the K-12 school system, there is an increasing need to support student mental health, and teacher well-being. Despite being tasked with playing a larger role in social-emotional well-being, little research has examined how confident teachers are in their ability to support student mental health, or the factors that are associated with these abilities. To address this gap, we examined how teacher mental health self-efficacy varied by grades taught, if mental health self-efficacy differed based on years of teaching experience, and if mental health self-efficacy was associated with teacher burnout. To do this, we analyzed teacher self-report data from 92 Oregon teachers. We found no relation between mental health self efficacy and school level, years of experience, or burnout. Implications of these null findings are discussed."
 format:                                                             
   html:                                                               
     toc: true                                                           
@@ -27,7 +27,7 @@ fig-height: 8
 
 ### Introduction
 
-Concerningly, both teachers and students are facing mental health challenges [@agyapong2022; @cdc2023]. In attempts to promote student well being, social emotional learning has gained traction [@schwartz2022]. While teachers are being tasked with taking on increased responsibility to promote student mental health, little research has examined how equipped teachers feel to do this. Existing research suggests that teacher training in social-emotional learning and mental health is limited [@schiepe2021].
+Concerningly, both teachers and students are facing mental health challenges [@agyapong2022; @cdc2023]. In attempts to promote student well-being, implementing social emotional learning (SEL) curriculum in K-12 classrooms has gained traction [@schwartz2022]. However, while teachers are being tasked with taking on increased responsibility to promote student mental health, little research has examined how efficacious teachers feel to engage in teaching and supporting students' SEL. Existing research suggests that teacher training in SEL and mental health is limited [@schiepe2021].
 
 With proper preparation and support, teachers have the potential to be impactful in preventative mental health support for students. For example, teachers already participate in screening for academic and behavioral challenges, especially with the expansion of multi-tiered systems of support (MTSS), and response to intervention frameworks. Thus, expanding these teacher-led screening procedures to include social-emotional well being could be beneficial. Moreover, schools serve as a centralized resource for connecting and referring families to other community resources. This study seeks to address gaps in the current research on teachers’ ability to support study social-emotional well being by assessing teachers’ self-efficacy in supporting students with mental health concerns.
 
@@ -45,17 +45,17 @@ The current study aims to develop an understanding of teachers’ perceptions of
 
 #### Participants and Recruitment
 
-Oregon K-12 teachers were recruited during Spring 2024 to complete an anonymous, online survey. The goal of this survey was to understand how Oregon teachers viewed their use of emotion regulation, well-being, and mental health self-efficacy in the classroom. Principals across Oregon were contacted and asked if they would be willing to share the survey with their teaching staff. The final sample consisted of 92 teachers. Teacher demographic data can be found in [Table 1: Demographic Data].
+Oregon K-12 teachers were recruited during Spring 2024 to complete an anonymous, online survey. The goal of this survey was to understand how Oregon teachers viewed their use of emotion regulation, well-being, and mental health self-efficacy (MHSE) in the classroom. Principals across Oregon were contacted and asked if they would be willing to share the survey with their teaching staff. The final sample consisted of 92 teachers. Teacher demographic data can be found in [Table 1: Demographic Data].
 
 #### Measures
 
 ***School Mental Health Self-Efficacy Teacher Scale (SMH-SETS)***
 
-The School Mental Health Self-Efficacy Teacher Scale (SMH-SETS) is a 15-item measure that assesses teachers’ confidence in their ability to recognize, support, and refer students when they experience mental health concerns in the classroom [@brann2021]. Participants reported scores from strongly disagree (1) to strongly agree (6). Previous studies demonstrated that the SMH-SETS has acceptable reliability (Cronbach’s alpha = 0.91) and internal consistency ( = 0.93) [@brann2021].
+The School Mental Health Self-Efficacy Teacher Scale (SMH-SETS) is a 15-item measure that assesses teachers’ confidence in their ability to recognize, support, and refer students when they experience mental health concerns in the classroom [@brann2021]. Participants rated themselves on a Likert scale from strongly disagree (1) to strongly agree (6). Previous studies demonstrated that the SMH-SETS has acceptable reliability (Cronbach’s alpha = 0.91) and internal consistency ( = 0.93) [@brann2021].
 
 ***Professional Quality of Life (ProQOL) Scale***
 
-The Professional Quality of Life (ProQOL) Scale measures positive and negative effects of working in a helping profession [@stamm2009]. This is a 30-item Likert-type scale, and participants rate questions from never (1) to very often (5). Items 1, 4, 15, 16, and 29 were reverse scored [@stamm2009]. For this study, the burnout subscale was calculated with items 1, 4, 8, 10, 15, 17, 19, 21, 26, and 29. Per the scoring manual, the average score on the burnout scale is 50 (SD= 10, alpha scale reliability =0.75).
+The Professional Quality of Life (ProQOL) Scale measures positive and negative effects of working in a helping profession [@stamm2009]. This is a 30-item Likert scale, and participants rate themselves from never (1) to very often (5). Items 1, 4, 15, 16, and 29 were reverse scored [@stamm2009]. For this study, the burnout subscale was calculated with items 1, 4, 8, 10, 15, 17, 19, 21, 26, and 29. Per the scoring manual, the average score on the burnout scale is 50 (SD= 10, alpha scale reliability =0.75).
 
 #### Data Analysis
 
@@ -83,7 +83,7 @@ multiplemean <- 4.98
 
 *Research Question 1: Do teacher reports of mental health self-efficacy differ by school level (i.e., elementary, middle, high school)?*
 
-The violin plot shown in [Plot 1] demonstrates no significant differences in average or spread of teacher mental health self efficacy by school level. Further, LINK-model 1 shows that there are no significant associations between teaching at middle school, high school, or multiple levels, and rating of mental health efficacy (p = 0.22, 0.28, and 0.27, respectively). The mean mental health efficacy of elementary teachers is `r elementarymean`, for middle school teachers is `r middlemean`, for high school teachers is `r highmean`, and for teachers who teach multiple grades is `r multiplemean`
+The violin plot shown in [Plot 1] demonstrates no significant differences in average or spread of teacher mental health self efficacy by school level. Further, [Model 1] shows that there are no significant associations between teaching at middle school, high school, or multiple levels, and rating of mental health efficacy (p = 0.22, 0.28, and 0.27, respectively). The mean mental health efficacy of elementary teachers is `r elementarymean`, for middle school teachers is `r middlemean`, for high school teachers is `r highmean`, and for teachers who teach multiple grades is `r multiplemean`
 
 *Research Question 2: Is there a relationship between teacher years of experience and teacher reports of mental health self-efficacy?*
 
@@ -97,13 +97,19 @@ Upon visual analysis, [Plot 3] demonstrates no significant differences in teache
 
 As student mental health concerns are on the rise, we aimed to explore teachers' perceptions of their mental health self-efficacy. First, we aimed to understand whether teacher reports of mental health self-efficacy differ by school level. Second, we aimed to understand whether there is any relationship between teachers' years of experience and their reports of mental health self-efficacy. Third, we aimed to explore any relationship between teacher mental health self-efficacy and burnout. We will highlight general significance of the findings, limitations, and implications for practice and future research.
 
-We found that there is no statistically significant association between the years of experience or school level and teachers' reports of mental health self-efficacy. Additionally, we did not find a statistically significant relationship between mental health self-efficacy and burnout, even when including covariates (i.e., school level, years of experience, current classroom). Although there are no significant findings, this could indicate that regardless of teachers’ years of experience, classroom context, or school level, teachers appear to have similar capacities and perceptions for mental health self-efficacy. This could be a promising as there are relatively acceptable ratings of mental health self-efficacy across all teachers, indicating that regardless of certain covariates, teachers are able to serve as mental health promoters. Despite the null findings, there are some limitations to this study that could have impacted the results. The sample only consists of 92 teachers, which is a relatively small sample size. Future research should recruit more teachers to better understand any potential relationships. Additionally, the sample is relatively homogeneous (i.e., primarily White, female teachers), and future research should intentionally recruit teachers representing a wider range of identities within the field. Additionally, although not significant at the 0.05 level, working as a special education teacher was approaching significance as a predictor in the relationship between mental health self-efficacy and burnout. Future work should intentionally focus on special education teachers and further explore mechanisms related to burnout. Finally, this data was self-report and cross-sectional, meaning the data represents teachers' self-perceived mental health self-efficacy. As this is a newer construct, multiple modes of data collection (e.g., multiple raters, observations, in-moment reports, perceptions over time) should be collected in future studies to further understand teachers' mental health self-efficacy. Overall, to best support teachers ability to support the mental health concerns of students while also prioritizing the well-being of teachers, the field will benefit from continued work in this area.
+We found that there is no statistically significant association between the years of experience or school level and teachers' reports of mental health self-efficacy. Additionally, we did not find a statistically significant relationship between mental health self-efficacy and burnout, even when including covariates (i.e., school level, years of experience, current classroom).
+
+Although there are no significant findings, this could indicate that regardless of teachers’ years of experience, classroom context, or school level, teachers appear to have similar capacities and perceptions for mental health self-efficacy. This could be a promising as there are relatively acceptable ratings of mental health self-efficacy across all teachers, indicating that regardless of certain covariates, teachers are able to serve as mental health promoters.
+
+Despite the null findings, there are some limitations to this study that could have impacted the results. The sample only consists of 92 teachers, which is a relatively small sample size. Future research should recruit more teachers to better understand any potential relationships. Additionally, the sample is relatively homogeneous (i.e., primarily White, female teachers), and future research should intentionally recruit teachers representing a wider range of identities within the field. Additionally, although not significant at the 0.05 level, working as a special education teacher was approaching significance as a predictor in the relationship between mental health self-efficacy and burnout. Future work should intentionally focus on special education teachers and further explore mechanisms related to burnout. Finally, this data was self-report and cross-sectional, meaning the data represents teachers' self-perceived mental health self-efficacy.
+
+As this is a newer construct, multiple modes of data collection (e.g., multiple raters, observations, in-moment reports, perceptions over time) should be collected in future studies to further understand teachers' mental health self-efficacy. Overall, to best support teachers ability to support the mental health concerns of students while also prioritizing the well-being of teachers, the field will benefit from continued work in this area.
 
 # Code
 
 ## Load Packages
 
-```{r}
+```{r, load-packages}
 
 #|include: false
 
@@ -280,7 +286,7 @@ final_data <- final_data %>%
 
 ## Data Inspection using Frequency Tables and Historgrams
 
-```{r}
+```{r, fig.width=5}
 
 #Compassion: frequency table and histogram
 
@@ -345,9 +351,7 @@ RQ1means
 
 # Table 1: Demographic Data
 
-```{r}
-
-#| label: table-1
+```{r, table-1}
 
 final_data_clean_factor <- final_data %>%
   select(age, race_eth, yrs_teach, current_class) %>%
@@ -401,8 +405,11 @@ demo_tbl %>%
 
 
 ```
-# Table 2
-```{r}
+
+# 
+
+```{r, pivot-wider, results='hide'}
+
 # Pivot wider
 demo_tbl2 <- final_data_clean_factor %>%
   pivot_wider(names_from = `Age`,
@@ -412,13 +419,13 @@ demo_tbl2 <- final_data_clean_factor %>%
     count = n(),
     percentage = n() / nrow(final_data_clean_factor) * 100,
     .groups = "drop"
-  )
+  ) %>%
+  kable()
 
 demo_tbl2
 
 
 ```
-
 
 # Plot 1
 
@@ -552,3 +559,33 @@ modelsummary(fit3,
 title = "Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers",
 notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 ```
+
+##### Software and Packages Used
+
+This project was completed with `R Studio` [@r] using the following packages:
+
+-   `dplyr` [@dplyr]
+
+-   `ggplot2` [@ggplot]
+
+-   `gt` [@gt]
+
+-   `here` [@here]
+
+-   `kableExtra` [@kable]
+
+-   `janitor` [@janitor]
+
+-   `Lahman` [@lahman]
+
+-   `mdsr` [@mdsr]
+
+-   `modelsummary` [@modelsummary]
+
+-   `nlme` [@nlme]
+
+-   `rio` [@rio]
+
+-   `sandwich` [@sandwich]
+
+-   `tidyverse` [@tidyverse]
