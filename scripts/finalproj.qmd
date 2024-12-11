@@ -25,6 +25,10 @@ fig-height: 8
 
 # Writing
 
+### Abstract
+
+In the K-12 school system, there is an increasing need to support student mental health, and teacher well-being. Despite being tasked with playing a larger role in social-emotional well-being, little research has examined how confident teachers are in their ability to support student mental health, or the factors that are associated with these abilities. To address this gap, we examined how teacher mental health self-efficacy varied by grades taught, if mental health self-efficacy differed based on years of teaching experience, and if mental health self-efficacy was associated with teacher burnout. To do this, we analyzed teacher self-report data for 92 Oregon teachers. We found no relation between mental health self efficacy and school level, years of experience, or burnout. Implications of these null findings are discussed. 
+
 ### Introduction
 
 Concerningly, both teachers and students are facing mental health challenges [@agyapong2022; @cdc2023]. In attempts to promote student well being, social emotional learning has gained traction [@schwartz2022]. While teachers are being tasked with taking on increased responsibility to promote student mental health, little research has examined how equipped teachers feel to do this. Existing research suggests that teacher training in social-emotional learning and mental health is limited [@schiepe2021].
@@ -87,18 +91,17 @@ The violin plot shown in [Plot 1] demonstrates no significant differences in ave
 
 *Research Question 2: Is there a relationship between teacher years of experience and teacher reports of mental health self-efficacy?*
 
-The box plot shows in [Plot 2] demonstrates no significant differences in average or spread of teacher mental health self efficacy by years of experience. There appears to be a trend of lower self efficacy in teachers who have 6 - 10 years of experience, but [Model 2] shows no significant associations by years of experience (p > 0.05 for all predictors)
+The box plot shows in [Plot 2] demonstrates no significant differences in average or spread of teacher mental health self efficacy by years of experience. There appears to be a trend of lower self efficacy in teachers who have 6 - 10 years of experience, but [Model 2] shows no significant associations by years of experience (p \> 0.05 for all predictors)
 
 *Research Question 3: Is there a relationship between teacher mental health self-efficacy and burnout?*
 
 Upon visual analysis, [Plot 3] demonstrates no significant differences in teacher burnout by mental health efficacy. To further explore this potential association, [Model 3] included covariates of school level, years of experience, and whether the teacher teaches general or special education. After accounting for these variables, there were still no significant associations between mental health self efficacy and teacher burnout.
 
-
 ### Discussion
 
-As student mental health concerns are on the rise, we aimed to explore teachers' perceptions of their mental health self-efficacy. First, we aimed to understand whether teacher reports of mental health self-efficacy differ by school level. Second, we aimed to understand whether there is any relationship between teachers' years of experience and their reports of mental health self-efficacy. Third, we aimed to explore any relationship between teacher mental health self-efficacy and burnout. We will highlight general significance of the findings, limitations, and implications for practice and future research. 
+As student mental health concerns are on the rise, we aimed to explore teachers' perceptions of their mental health self-efficacy. First, we aimed to understand whether teacher reports of mental health self-efficacy differ by school level. Second, we aimed to understand whether there is any relationship between teachers' years of experience and their reports of mental health self-efficacy. Third, we aimed to explore any relationship between teacher mental health self-efficacy and burnout. We will highlight general significance of the findings, limitations, and implications for practice and future research.
 
-We found that there is no statistically significant association between the years of experience or school level and teachers' reports of mental health self-efficacy. Additionally, we did not find a statistically significant relationship between mental health self-efficacy and burnout, even when including covariates (i.e., school level, years of experience, current classroom). Despite the null findings, there are some limitations to this study that could have impacted the results. The sample only consists of 92 teachers, which is a relatively small sample size. Future research should recruit more teachers to better understand any potential relationships. Additionally, the sample is relatively homogeneous (i.e., primarily White, female teachers), and future research should intentionally recruit teachers representing a wider range of identities within the field. Additionally, although not significant at the 0.05 level, working as a special education teacher was approaching significance as a predictor in the relationship between mental health self-efficacy and burnout. Future work should intentionally focus on special education teachers and further explore mechanisms related to burnout. Finally, this data was self-report and cross-sectional, so the data represents teachers' self-perceived mental health self-efficacy. As this is a newer construct, multiple modes of data collection (e.g., multiple raters, observations, in-moment reports, perceptions over time) should be collected in future studies to further understand teachers' mental health self-efficacy. Overall, to best support teachers ability to support the mental health concerns of students while also prioritizing the well-being of teachers, the field will benefit from continued work in this area. 
+We found that there is no statistically significant association between the years of experience or school level and teachers' reports of mental health self-efficacy. Additionally, we did not find a statistically significant relationship between mental health self-efficacy and burnout, even when including covariates (i.e., school level, years of experience, current classroom). Despite the null findings, there are some limitations to this study that could have impacted the results. The sample only consists of 92 teachers, which is a relatively small sample size. Future research should recruit more teachers to better understand any potential relationships. Additionally, the sample is relatively homogeneous (i.e., primarily White, female teachers), and future research should intentionally recruit teachers representing a wider range of identities within the field. Additionally, although not significant at the 0.05 level, working as a special education teacher was approaching significance as a predictor in the relationship between mental health self-efficacy and burnout. Future work should intentionally focus on special education teachers and further explore mechanisms related to burnout. Finally, this data was self-report and cross-sectional, meaning the data represents teachers' self-perceived mental health self-efficacy. As this is a newer construct, multiple modes of data collection (e.g., multiple raters, observations, in-moment reports, perceptions over time) should be collected in future studies to further understand teachers' mental health self-efficacy. Overall, to best support teachers ability to support the mental health concerns of students while also prioritizing the well-being of teachers, the field will benefit from continued work in this area.
 
 # Code
 
@@ -477,7 +480,9 @@ ggplotrq2
   
 
 ```
+
 # Model 2
+
 ```{r}
 #OLS 
 
@@ -519,6 +524,7 @@ ggplotrq3
 ```
 
 # Model 3
+
 ```{r}
 #OLS 
 
@@ -532,4 +538,3 @@ modelsummary(fit3,
 title = "Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers",
 notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 ```
-
