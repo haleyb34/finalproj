@@ -73,6 +73,27 @@ We created a scatter plot (see [Plot 3]) to visualize any relationship between t
 
 ### Results
 
+```{r include = FALSE}
+elementarymean <- 4.96
+middlemean <- 4.90
+highmean <- 5.07
+multiplemean <- 4.98
+
+```
+
+*Research Question 1: Do teacher reports of mental health self-efficacy differ by school level (i.e., elementary, middle, high school)?*
+
+The violin plot shown in [Plot 1] demonstrates no significant differences in average or spread of teacher mental health self efficacy by school level. Further, LINK-model 1 shows that there are no significant associations between teaching at middle school, high school, or multiple levels, and rating of mental health efficacy (p = 0.22, 0.28, and 0.27, respectively). The mean mental health efficacy of elementary teachers is `r elementarymean`, for middle school teachers is `r middlemean`, for high school teachers is `r highmean`, and for teachers who teach multiple grades is `r multiplemean`
+
+*Research Question 2: Is there a relationship between teacher years of experience and teacher reports of mental health self-efficacy?*
+
+The box plot shows in [Plot 2] demonstrates no significant differences in average or spread of teacher mental health self efficacy by years of experience. There appears to be a trend of lower self efficacy in teachers who have 6 - 10 years of experience, but [Model 2] shows no significant associations by years of experience (p > 0.05 for all predictors)
+
+*Research Question 3: Is there a relationship between teacher mental health efficacy and burnout?*
+
+Upon visual analysis, [Plot 3] demonstrates no significant differences in teacher burnout by mental health efficacy. To further explore this potential association, [Model 3] included covariates of school level, years of experience, and whether the teacher teaches general or special education. After accounting for these variables, there were still no significant associations between mental health self efficacy and teacher burnout.
+
+
 ### Discussion
 
 # Code
@@ -311,6 +332,12 @@ trauma_hist <- ggplot(final_data, aes(x=sum_sectrauma)) +
 
 trauma_hist
 
+RQ1means <- final_data %>%
+  group_by(school_level) %>%
+  summarise(mean_mh = mean(mean_mhl_id, na.rm = TRUE))
+
+RQ1means
+
 ```
 
 # Table 1: Demographic Data
@@ -379,34 +406,6 @@ demo_tbl %>%
 #Mental Health Efficacy by School Type
 #Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
 
-#There are 4 answer options on this question (Elementary, K-8, Middle, and High School), plus an other option.  
-#table(final_data$school_level)
-
-
-#Six people wrote in answers. 4 said K-12, 1 said 6-8 school, and 1 said middle and high school. We could create a new category for K-12. I would feel comfortable putting the 6-8 person in the middle school category, and not sure what we'd want to do for the middle and high school. For now, I'm not going to include the "Other" option in the plot. 
-
-#table(final_data$school_level_other)
-
-##I would like to rearrange the y-axis to be in order of level: Elementary, K-8, Middle, then High School. If you know how to do that, let me know! -Suzie
-
-##Also there is one N/A for the mean mhl score, wondering if I need to add a na.rm somewhere? Lastly, I am getting a warning and I'm guessing that's what it's from. 
-
-#plot1 <- final_data %>%
-  #filter(school_level != "Other (Please Specify)") %>%
-  #select(school_level, mean_mhl_id) %>%
-  #ggplot(aes(x = mean_mhl_id, y= school_level)) +
-  #geom_density_ridges(fill = "lightblue", alpha = .7) +
-  #labs(x= "Mental Health  Self-Efficacy Score",
-       #y= "School Level",
-       #title = "Figure 1",
-       #subtitle = "Teacher Mental Health Self-Efficacy by School Level") +
-  #theme_get()
-
-#final_data %>%
-  #ggplot(aes(school_type, mean_mhl_id) +
-#geom_*** +
-#theme
-
 final_data <- final_data %>%
     mutate(school_level= fct_collapse(school_level, 
         "Multiple Levels" = c("Other (Please Specify)", "K-8"),
@@ -430,6 +429,12 @@ ggplotrq1 <- final_data %>%
 
 ggplotrq1
 
+
+```
+
+# Model 1
+
+```{r}
 final_data$school_level <- factor(final_data$school_level, levels = c("Elementary School", "Middle School", "High School", "Multiple Levels"))
 
 fit1 <- lm(mean_mhl_id ~ school_level, data=final_data)
@@ -443,7 +448,7 @@ modelsummary(fit1,
              coef_rename = c("school_levelMiddle School" = "Middle School",
                              "school_levelHigh School" = "High School",
                              "school_levelMultiple Levels" = "Multiple Levels"),
-title = "Table ##. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers",
+title = "Model 1. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers",
 notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one district."))
 
 ```
@@ -466,6 +471,10 @@ ggplotrq2 <- final_data %>%
 
 ggplotrq2
   
+
+```
+# Model 2
+```{r}
 #OLS 
 
 final_data$yrs_combine <- factor(final_data$yrs_combine, levels = c("11+ years", "0-5 years", "6-10 years"))
@@ -502,6 +511,11 @@ ggplotrq3 <- final_data %>%
 
 ggplotrq3
 
+
+```
+
+# Model 3
+```{r}
 #OLS 
 
 fit3 <- lm(sum_burnout ~ mean_mhl_id + school_level + yrs_combine + current_class, data=final_data)
@@ -514,3 +528,4 @@ modelsummary(fit3,
 title = "Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers",
 notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 ```
+

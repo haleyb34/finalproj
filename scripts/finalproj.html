@@ -131,6 +131,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#table-1-demographic-data" id="toc-table-1-demographic-data" class="nav-link" data-scroll-target="#table-1-demographic-data">Table 1: Demographic Data</a></li>
   <li><a href="#plot-1" id="toc-plot-1" class="nav-link" data-scroll-target="#plot-1">Plot 1</a></li>
+  <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1">Model 1</a></li>
   <li><a href="#plot-2" id="toc-plot-2" class="nav-link" data-scroll-target="#plot-2">Plot 2</a></li>
   <li><a href="#plot-3" id="toc-plot-3" class="nav-link" data-scroll-target="#plot-3">Plot 3</a></li>
   </ul>
@@ -217,6 +218,9 @@ div.csl-indent {
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
+<p><em>Research Question 1: Do teacher reports of mental health self-efficacy differ by school level (i.e., elementary, middle, high school)?</em></p>
+<p>The violin plot shown in <a href="#plot-1">Plot 1</a> demonstrates no significant differences in average or spread of teacher mental health self efficacy by school level. Further, LINK-model 1 shows that there are no significant associations between teaching at middle school, high school, or multiple levels, and rating of mental health efficacy (p = 0.22, 0.28, and 0.27, respectively). The mean mental health efficacy of elementary teachers is 4.96</p>
+<p><em>Research Question 2: Is there a relationship between teacher years of experience and teacher reports of mental health self-efficacy?</em></p>
 </section>
 <section id="discussion" class="level3">
 <h3 class="anchored" data-anchor-id="discussion">Discussion</h3>
@@ -556,7 +560,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="624"></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="624"></p>
 </figure>
 </div>
 </div>
@@ -693,7 +697,7 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="624"></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid figure-img" width="624"></p>
 </figure>
 </div>
 </div>
@@ -838,9 +842,27 @@ div.csl-indent {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="finalproj_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="624"></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid figure-img" width="624"></p>
 </figure>
 </div>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>RQ1means <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(school_level) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_mh =</span> <span class="fu">mean</span>(mean_mhl_id, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>RQ1means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  school_level           mean_mh
+  &lt;chr&gt;                    &lt;dbl&gt;
+1 Elementary School         4.96
+2 High School               5.07
+3 K-8                       4.8 
+4 Middle School             4.90
+5 Other (Please Specify)    5.21</code></pre>
 </div>
 </div>
 </section>
@@ -850,75 +872,75 @@ div.csl-indent {
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: table-1</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>final_data_clean_factor <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, race_eth, yrs_teach, current_class) <span class="sc">%&gt;%</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span> <span class="ot">=</span> <span class="st">"age"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Race/Ethnicity"</span> <span class="ot">=</span> <span class="st">"race_eth"</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Years of Teaching Experience"</span> <span class="ot">=</span> <span class="st">"yrs_teach"</span>,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Classroom Type"</span> <span class="ot">=</span> <span class="st">"current_class"</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.character))</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot longer and calculate counts and percentages</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>demo_tbl <span class="ot">&lt;-</span> final_data_clean_factor <span class="sc">%&gt;%</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"variable"</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"level"</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable, level) <span class="sc">%&gt;%</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> <span class="fu">n</span>() <span class="sc">/</span> <span class="fu">nrow</span>(final_data_clean_factor) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Format table with gt, grouping rows by "variable"</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>demo_tbl <span class="sc">%&gt;%</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"variable"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="st">""</span>,</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="st">"Count"</span>,</span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> <span class="st">"Percent (%)"</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> percentage,</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"Table 1: Demographic Data"</span>)</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_title</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tab_style</span>(</span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">style =</span> <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"ivory"</span>),</span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">locations =</span> <span class="fu">cells_body</span>()</span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: table-1</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>final_data_clean_factor <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, race_eth, yrs_teach, current_class) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Age"</span> <span class="ot">=</span> <span class="st">"age"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Race/Ethnicity"</span> <span class="ot">=</span> <span class="st">"race_eth"</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Years of Teaching Experience"</span> <span class="ot">=</span> <span class="st">"yrs_teach"</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Current Classroom Type"</span> <span class="ot">=</span> <span class="st">"current_class"</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), as.character))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot longer and calculate counts and percentages</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>demo_tbl <span class="ot">&lt;-</span> final_data_clean_factor <span class="sc">%&gt;%</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"variable"</span>,</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"level"</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(variable, level) <span class="sc">%&gt;%</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="fu">n</span>(),</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> <span class="fu">n</span>() <span class="sc">/</span> <span class="fu">nrow</span>(final_data_clean_factor) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Format table with gt, grouping rows by "variable"</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>demo_tbl <span class="sc">%&gt;%</span></span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>(<span class="at">groupname_col =</span> <span class="st">"variable"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cols_label</span>(</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">level =</span> <span class="st">""</span>,</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">count =</span> <span class="st">"Count"</span>,</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">percentage =</span> <span class="st">"Percent (%)"</span></span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">columns =</span> percentage,</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">decimals =</span> <span class="dv">2</span></span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="fu">md</span>(<span class="st">"Table 1: Demographic Data"</span>)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_title</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_style</span>(<span class="at">style =</span> <span class="fu">cell_text</span>(<span class="at">weight =</span> <span class="st">"bold"</span>),</span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>            <span class="at">locations =</span> <span class="fu">cells_column_labels</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>     <span class="fu">tab_style</span>(</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>       <span class="at">style =</span> <span class="fu">cell_fill</span>(<span class="at">color =</span> <span class="st">"ivory"</span>),</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>       <span class="at">locations =</span> <span class="fu">cells_body</span>()</span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>     )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<div id="trwwrmrcvs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#trwwrmrcvs table {
+<div id="wrliusdlth" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#wrliusdlth table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#trwwrmrcvs thead, #trwwrmrcvs tbody, #trwwrmrcvs tfoot, #trwwrmrcvs tr, #trwwrmrcvs td, #trwwrmrcvs th {
+#wrliusdlth thead, #wrliusdlth tbody, #wrliusdlth tfoot, #wrliusdlth tr, #wrliusdlth td, #wrliusdlth th {
   border-style: none;
 }
 
-#trwwrmrcvs p {
+#wrliusdlth p {
   margin: 0;
   padding: 0;
 }
 
-#trwwrmrcvs .gt_table {
+#wrliusdlth .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -944,12 +966,12 @@ div.csl-indent {
   border-left-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_caption {
+#wrliusdlth .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#trwwrmrcvs .gt_title {
+#wrliusdlth .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -961,7 +983,7 @@ div.csl-indent {
   border-bottom-width: 0;
 }
 
-#trwwrmrcvs .gt_subtitle {
+#wrliusdlth .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -973,7 +995,7 @@ div.csl-indent {
   border-top-width: 0;
 }
 
-#trwwrmrcvs .gt_heading {
+#wrliusdlth .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -985,13 +1007,13 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_bottom_border {
+#wrliusdlth .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_col_headings {
+#wrliusdlth .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1006,7 +1028,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_col_heading {
+#wrliusdlth .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1026,7 +1048,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#trwwrmrcvs .gt_column_spanner_outer {
+#wrliusdlth .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1038,15 +1060,15 @@ div.csl-indent {
   padding-right: 4px;
 }
 
-#trwwrmrcvs .gt_column_spanner_outer:first-child {
+#wrliusdlth .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#trwwrmrcvs .gt_column_spanner_outer:last-child {
+#wrliusdlth .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#trwwrmrcvs .gt_column_spanner {
+#wrliusdlth .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1058,11 +1080,11 @@ div.csl-indent {
   width: 100%;
 }
 
-#trwwrmrcvs .gt_spanner_row {
+#wrliusdlth .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#trwwrmrcvs .gt_group_heading {
+#wrliusdlth .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1088,7 +1110,7 @@ div.csl-indent {
   text-align: left;
 }
 
-#trwwrmrcvs .gt_empty_group_heading {
+#wrliusdlth .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1103,15 +1125,15 @@ div.csl-indent {
   vertical-align: middle;
 }
 
-#trwwrmrcvs .gt_from_md > :first-child {
+#wrliusdlth .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#trwwrmrcvs .gt_from_md > :last-child {
+#wrliusdlth .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#trwwrmrcvs .gt_row {
+#wrliusdlth .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1130,7 +1152,7 @@ div.csl-indent {
   overflow-x: hidden;
 }
 
-#trwwrmrcvs .gt_stub {
+#wrliusdlth .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1143,7 +1165,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#trwwrmrcvs .gt_stub_row_group {
+#wrliusdlth .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1157,15 +1179,15 @@ div.csl-indent {
   vertical-align: top;
 }
 
-#trwwrmrcvs .gt_row_group_first td {
+#wrliusdlth .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#trwwrmrcvs .gt_row_group_first th {
+#wrliusdlth .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#trwwrmrcvs .gt_summary_row {
+#wrliusdlth .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1175,16 +1197,16 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#trwwrmrcvs .gt_first_summary_row {
+#wrliusdlth .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_first_summary_row.thick {
+#wrliusdlth .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#trwwrmrcvs .gt_last_summary_row {
+#wrliusdlth .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1194,7 +1216,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_grand_summary_row {
+#wrliusdlth .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1204,7 +1226,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#trwwrmrcvs .gt_first_grand_summary_row {
+#wrliusdlth .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1214,7 +1236,7 @@ div.csl-indent {
   border-top-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_last_grand_summary_row_top {
+#wrliusdlth .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1224,11 +1246,11 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_striped {
+#wrliusdlth .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#trwwrmrcvs .gt_table_body {
+#wrliusdlth .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1237,7 +1259,7 @@ div.csl-indent {
   border-bottom-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_footnotes {
+#wrliusdlth .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1251,7 +1273,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_footnote {
+#wrliusdlth .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1260,7 +1282,7 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#trwwrmrcvs .gt_sourcenotes {
+#wrliusdlth .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1274,7 +1296,7 @@ div.csl-indent {
   border-right-color: #D3D3D3;
 }
 
-#trwwrmrcvs .gt_sourcenote {
+#wrliusdlth .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1282,72 +1304,72 @@ div.csl-indent {
   padding-right: 5px;
 }
 
-#trwwrmrcvs .gt_left {
+#wrliusdlth .gt_left {
   text-align: left;
 }
 
-#trwwrmrcvs .gt_center {
+#wrliusdlth .gt_center {
   text-align: center;
 }
 
-#trwwrmrcvs .gt_right {
+#wrliusdlth .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#trwwrmrcvs .gt_font_normal {
+#wrliusdlth .gt_font_normal {
   font-weight: normal;
 }
 
-#trwwrmrcvs .gt_font_bold {
+#wrliusdlth .gt_font_bold {
   font-weight: bold;
 }
 
-#trwwrmrcvs .gt_font_italic {
+#wrliusdlth .gt_font_italic {
   font-style: italic;
 }
 
-#trwwrmrcvs .gt_super {
+#wrliusdlth .gt_super {
   font-size: 65%;
 }
 
-#trwwrmrcvs .gt_footnote_marks {
+#wrliusdlth .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#trwwrmrcvs .gt_asterisk {
+#wrliusdlth .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#trwwrmrcvs .gt_indent_1 {
+#wrliusdlth .gt_indent_1 {
   text-indent: 5px;
 }
 
-#trwwrmrcvs .gt_indent_2 {
+#wrliusdlth .gt_indent_2 {
   text-indent: 10px;
 }
 
-#trwwrmrcvs .gt_indent_3 {
+#wrliusdlth .gt_indent_3 {
   text-indent: 15px;
 }
 
-#trwwrmrcvs .gt_indent_4 {
+#wrliusdlth .gt_indent_4 {
   text-indent: 20px;
 }
 
-#trwwrmrcvs .gt_indent_5 {
+#wrliusdlth .gt_indent_5 {
   text-indent: 25px;
 }
 
-#trwwrmrcvs .katex-display {
+#wrliusdlth .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#trwwrmrcvs div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#wrliusdlth div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1498,59 +1520,31 @@ div.csl-indent {
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mental Health Efficacy by School Type</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#There are 4 answer options on this question (Elementary, K-8, Middle, and High School), plus an other option.  </span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#table(final_data$school_level)</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Six people wrote in answers. 4 said K-12, 1 said 6-8 school, and 1 said middle and high school. We could create a new category for K-12. I would feel comfortable putting the 6-8 person in the middle school category, and not sure what we'd want to do for the middle and high school. For now, I'm not going to include the "Other" option in the plot. </span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#table(final_data$school_level_other)</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="do">##I would like to rearrange the y-axis to be in order of level: Elementary, K-8, Middle, then High School. If you know how to do that, let me know! -Suzie</span></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="do">##Also there is one N/A for the mean mhl score, wondering if I need to add a na.rm somewhere? Lastly, I am getting a warning and I'm guessing that's what it's from. </span></span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co">#plot1 &lt;- final_data %&gt;%</span></span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter(school_level != "Other (Please Specify)") %&gt;%</span></span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">#select(school_level, mean_mhl_id) %&gt;%</span></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggplot(aes(x = mean_mhl_id, y= school_level)) +</span></span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">#geom_density_ridges(fill = "lightblue", alpha = .7) +</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labs(x= "Mental Health  Self-Efficacy Score",</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>       <span class="co">#y= "School Level",</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>       <span class="co">#title = "Figure 1",</span></span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>       <span class="co">#subtitle = "Teacher Mental Health Self-Efficacy by School Level") +</span></span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="co">#theme_get()</span></span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="co">#final_data %&gt;%</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggplot(aes(school_type, mean_mhl_id) +</span></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="co">#geom_*** +</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="co">#theme</span></span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">school_level=</span> <span class="fu">fct_collapse</span>(school_level, </span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Multiple Levels"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Other (Please Specify)"</span>, <span class="st">"K-8"</span>),</span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Elementary School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Elementary School"</span>),</span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Middle School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Middle School"</span>),</span>
-<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"High School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"High School"</span>))) </span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>ggplotrq1 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_mhl_id, <span class="at">x =</span> school_level, <span class="at">fill =</span> school_level)) <span class="sc">+</span></span>
-<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"median"</span>,</span>
-<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"crossbar"</span>,</span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>               <span class="at">width =</span> <span class="fl">0.5</span>,</span>
-<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 1: Teacher Mental Health Self-Efficacy </span><span class="sc">\n</span><span class="st"> by School Level"</span>) <span class="sc">+</span></span>
-<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Years of Experience"</span>) <span class="sc">+</span></span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mental Health Efficacy"</span>) <span class="sc">+</span></span>
-<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"School Level"</span>) <span class="sc">+</span></span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>ggplotrq1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Mental Health Efficacy by School Type</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? </span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>final_data <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">school_level=</span> <span class="fu">fct_collapse</span>(school_level, </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Multiple Levels"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Other (Please Specify)"</span>, <span class="st">"K-8"</span>),</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Elementary School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Elementary School"</span>),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Middle School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Middle School"</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"High School"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"High School"</span>))) </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>ggplotrq1 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_mhl_id, <span class="at">x =</span> school_level, <span class="at">fill =</span> school_level)) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>() <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun=</span><span class="st">"median"</span>,</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>               <span class="at">geom =</span> <span class="st">"crossbar"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>               <span class="at">width =</span> <span class="fl">0.5</span>,</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>               <span class="at">colour =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 1: Teacher Mental Health Self-Efficacy </span><span class="sc">\n</span><span class="st"> by School Level"</span>) <span class="sc">+</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Years of Experience"</span>) <span class="sc">+</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mental Health Efficacy"</span>) <span class="sc">+</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">color =</span> <span class="st">"School Level"</span>) <span class="sc">+</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>ggplotrq1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -1559,12 +1553,17 @@ div.csl-indent {
 </figure>
 </div>
 </div>
+</div>
+</section>
+<section id="model-1" class="level1">
+<h1>Model 1</h1>
+<div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>final_data<span class="sc">$</span>school_level <span class="ot">&lt;-</span> <span class="fu">factor</span>(final_data<span class="sc">$</span>school_level, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Elementary School"</span>, <span class="st">"Middle School"</span>, <span class="st">"High School"</span>, <span class="st">"Multiple Levels"</span>))</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_mhl_id <span class="sc">~</span> school_level, <span class="at">data=</span>final_data)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>final_data<span class="sc">$</span>school_level <span class="ot">&lt;-</span> <span class="fu">factor</span>(final_data<span class="sc">$</span>school_level, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Elementary School"</span>, <span class="st">"Middle School"</span>, <span class="st">"High School"</span>, <span class="st">"Multiple Levels"</span>))</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_mhl_id <span class="sc">~</span> school_level, <span class="at">data=</span>final_data)</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
@@ -1576,106 +1575,49 @@ Residuals    87 57.548 0.66147               </code></pre>
 </div>
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit1, </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"school_levelMiddle School"</span> <span class="ot">=</span> <span class="st">"Middle School"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"school_levelHigh School"</span> <span class="ot">=</span> <span class="st">"High School"</span>,</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"school_levelMultiple Levels"</span> <span class="ot">=</span> <span class="st">"Multiple Levels"</span>),</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Table ##. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers"</span>,</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one district."</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit1, </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"school_levelMiddle School"</span> <span class="ot">=</span> <span class="st">"Middle School"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"school_levelHigh School"</span> <span class="ot">=</span> <span class="st">"High School"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"school_levelMultiple Levels"</span> <span class="ot">=</span> <span class="st">"Multiple Levels"</span>),</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Model 1. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers"</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one district."</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<!-- preamble start -->
+ 
 
-    <script>
-
-      function styleCell_kfmt9y3mvkgz5vhf3muk(i, j, css_id) {
-          var table = document.getElementById("tinytable_kfmt9y3mvkgz5vhf3muk");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_kfmt9y3mvkgz5vhf3muk');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_kfmt9y3mvkgz5vhf3muk(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_kfmt9y3mvkgz5vhf3muk");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-      // tinytable span after
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_xmxxn09zd28mnlh82a3g',}, 
-          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_wi6rfyqk3e5roelqvs67',}, 
-          { positions: [ { i: 10, j: 1 },  ], css_id: 'tinytable_css_trrrg5ltaiq51z7vt0ov',}, 
-          { positions: [ { i: 8, j: 1 },  ], css_id: 'tinytable_css_p8x2debnh4q9enwucds5',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 9, j: 0 },  ], css_id: 'tinytable_css_p3jm23znrro092611dai',}, 
-          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_nbiqthtg12zz9fnlav9s',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 9, j: 1 },  ], css_id: 'tinytable_css_53d2o2v6uq7aln3xyirt',}, 
-          { positions: [ { i: 10, j: 0 },  ], css_id: 'tinytable_css_0guoxhnucum7fezorst5',}, 
-          ];
-
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  styleCell_kfmt9y3mvkgz5vhf3muk(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
-    </script>
-
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_evgquw8ts4q1qtlica5n</title>
     <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_xmxxn09zd28mnlh82a3g, .table th.tinytable_css_xmxxn09zd28mnlh82a3g { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_wi6rfyqk3e5roelqvs67, .table th.tinytable_css_wi6rfyqk3e5roelqvs67 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_trrrg5ltaiq51z7vt0ov, .table th.tinytable_css_trrrg5ltaiq51z7vt0ov { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_p8x2debnh4q9enwucds5, .table th.tinytable_css_p8x2debnh4q9enwucds5 { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_p3jm23znrro092611dai, .table th.tinytable_css_p3jm23znrro092611dai { text-align: left; }
-      .table td.tinytable_css_nbiqthtg12zz9fnlav9s, .table th.tinytable_css_nbiqthtg12zz9fnlav9s { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_53d2o2v6uq7aln3xyirt, .table th.tinytable_css_53d2o2v6uq7aln3xyirt { text-align: center; }
-      .table td.tinytable_css_0guoxhnucum7fezorst5, .table th.tinytable_css_0guoxhnucum7fezorst5 { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+.table td.tinytable_css_lgzxyhcu3zeyveyo8fl0, .table th.tinytable_css_lgzxyhcu3zeyveyo8fl0 {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_779opv3ppp965sd2xhxq, .table th.tinytable_css_779opv3ppp965sd2xhxq {    text-align: left; }
+.table td.tinytable_css_bwtajc0dj2zuk9402yj7, .table th.tinytable_css_bwtajc0dj2zuk9402yj7 {    text-align: center; }
+.table td.tinytable_css_z17z73dn05raoup0bvkr, .table th.tinytable_css_z17z73dn05raoup0bvkr {    border-bottom: solid 0.05em black; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
     <div class="container">
-      <table class="table table-borderless" id="tinytable_kfmt9y3mvkgz5vhf3muk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_evgquw8ts4q1qtlica5n" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
-        </thead><caption>Table ##. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers</caption>
+        </thead><caption>Model 1. Ordinary Least Squares estimates of the relationship between the school level and average MHSE for Oregon teachers</caption>
               <tbody><tr>
                 <th scope="col"> </th>
                 <th scope="col">(1)</th>
@@ -1724,75 +1666,21 @@ Residuals    87 57.548 0.66147               </code></pre>
                   <td>R2             </td>
                   <td>0.004  </td>
                 </tr>
+                <tr>
+                  <td>F              </td>
+                  <td>0.097  </td>
+                </tr>
         </tbody>
       </table>
     </div>
-<!-- hack to avoid NA insertion in last line -->
-</div>
-</div>
-</section>
-<section id="plot-2" class="level1">
-<h1>Plot 2</h1>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Research question 2: Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ggplotrq2 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yrs_combine =</span> <span class="fu">factor</span>(yrs_combine, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0-5 years"</span>, <span class="st">"6-10 years"</span>, <span class="st">"11+ years"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_mhl_id, <span class="at">x =</span> yrs_combine)) <span class="sc">+</span></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 2: Teacher Mental Health Self-Efficacy </span><span class="sc">\n</span><span class="st"> by Years of Teaching Experience"</span>) <span class="sc">+</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Years of Experience"</span>) <span class="sc">+</span></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>ggplotrq2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="624"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OLS </span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>final_data<span class="sc">$</span>yrs_combine <span class="ot">&lt;-</span> <span class="fu">factor</span>(final_data<span class="sc">$</span>yrs_combine, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"11+ years"</span>, <span class="st">"0-5 years"</span>, <span class="st">"6-10 years"</span>))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_mhl_id <span class="sc">~</span> yrs_combine, <span class="at">data=</span>final_data)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit2, </span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"yrs_combine0-5 years"</span> <span class="ot">=</span> <span class="st">"0-5 years"</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"yrs_combine6-10 years"</span> <span class="ot">=</span> <span class="st">"6-10 years"</span>),</span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Table ##. Ordinary Least Squares estimates of the relationship between the years of experience and average MHSE for Oregon teachers"</span>,</span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<!-- preamble start -->
 
     <script>
-
-      function styleCell_wet96ek0v943ujvyuj6w(i, j, css_id) {
-          var table = document.getElementById("tinytable_wet96ek0v943ujvyuj6w");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
+      function styleCell_tinytable_f5hk2heip9zo0ruqbam8(i, j, css_id) {
+        var table = document.getElementById("tinytable_evgquw8ts4q1qtlica5n");
+        table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_wet96ek0v943ujvyuj6w');
+        var table = document.getElementById('tinytable_evgquw8ts4q1qtlica5n');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1800,8 +1688,8 @@ Residuals    87 57.548 0.66147               </code></pre>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_wet96ek0v943ujvyuj6w(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_wet96ek0v943ujvyuj6w");
+      function spanCell_tinytable_f5hk2heip9zo0ruqbam8(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_evgquw8ts4q1qtlica5n");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -1827,42 +1715,118 @@ Residuals    87 57.548 0.66147               </code></pre>
         targetCell.rowSpan = rowspan;
         targetCell.colSpan = colspan;
       }
-      // tinytable span after
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: 8, j: 1 },  ], css_id: 'tinytable_css_zj86cv5lmfhba5twz9yx',}, 
-          { positions: [ { i: 6, j: 1 },  ], css_id: 'tinytable_css_z87n8ep7z176tyhlnukr',}, 
-          { positions: [ { i: 6, j: 0 },  ], css_id: 'tinytable_css_y5rmk56xfpeah0wi0tbc',}, 
-          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_q415zhaj6gk1ze0cjpwp',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 7, j: 0 },  ], css_id: 'tinytable_css_l9r4h3ddvm4v2d8c8swm',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 7, j: 1 },  ], css_id: 'tinytable_css_kd5in3ddvihbvp19h23r',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_d834gd1y1yakcoca2l6q',}, 
-          { positions: [ { i: 8, j: 0 },  ], css_id: 'tinytable_css_cyesgrciyjwdqqn8mtxb',}, 
-          ];
 
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  styleCell_wet96ek0v943ujvyuj6w(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(0, 0, 'tinytable_css_lgzxyhcu3zeyveyo8fl0') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(0, 1, 'tinytable_css_lgzxyhcu3zeyveyo8fl0') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(0, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(1, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(2, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(3, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(4, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(5, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(6, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(7, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(8, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(9, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(10, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(11, 0, 'tinytable_css_779opv3ppp965sd2xhxq') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(0, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(1, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(2, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(3, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(4, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(5, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(6, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(7, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(8, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(9, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(10, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(11, 1, 'tinytable_css_bwtajc0dj2zuk9402yj7') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(8, 0, 'tinytable_css_z17z73dn05raoup0bvkr') })
+window.addEventListener('load', function () { styleCell_tinytable_f5hk2heip9zo0ruqbam8(8, 1, 'tinytable_css_z17z73dn05raoup0bvkr') })
     </script>
 
+  
+
+
+</div>
+</div>
+</section>
+<section id="plot-2" class="level1">
+<h1>Plot 2</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Research question 2: Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>ggplotrq2 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">yrs_combine =</span> <span class="fu">factor</span>(yrs_combine, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"0-5 years"</span>, <span class="st">"6-10 years"</span>, <span class="st">"11+ years"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_mhl_id, <span class="at">x =</span> yrs_combine)) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 2: Teacher Mental Health Self-Efficacy </span><span class="sc">\n</span><span class="st"> by Years of Teaching Experience"</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Years of Experience"</span>) <span class="sc">+</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>ggplotrq2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="624"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OLS </span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>final_data<span class="sc">$</span>yrs_combine <span class="ot">&lt;-</span> <span class="fu">factor</span>(final_data<span class="sc">$</span>yrs_combine, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"11+ years"</span>, <span class="st">"0-5 years"</span>, <span class="st">"6-10 years"</span>))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(mean_mhl_id <span class="sc">~</span> yrs_combine, <span class="at">data=</span>final_data)</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit2, </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">coef_rename =</span> <span class="fu">c</span>(<span class="st">"yrs_combine0-5 years"</span> <span class="ot">=</span> <span class="st">"0-5 years"</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"yrs_combine6-10 years"</span> <span class="ot">=</span> <span class="st">"6-10 years"</span>),</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Table ##. Ordinary Least Squares estimates of the relationship between the years of experience and average MHSE for Oregon teachers"</span>,</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+ 
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_mtv06w4qf5z9dwo14v0u</title>
     <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_zj86cv5lmfhba5twz9yx, .table th.tinytable_css_zj86cv5lmfhba5twz9yx { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_z87n8ep7z176tyhlnukr, .table th.tinytable_css_z87n8ep7z176tyhlnukr { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_y5rmk56xfpeah0wi0tbc, .table th.tinytable_css_y5rmk56xfpeah0wi0tbc { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_q415zhaj6gk1ze0cjpwp, .table th.tinytable_css_q415zhaj6gk1ze0cjpwp { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_l9r4h3ddvm4v2d8c8swm, .table th.tinytable_css_l9r4h3ddvm4v2d8c8swm { text-align: left; }
-      .table td.tinytable_css_kd5in3ddvihbvp19h23r, .table th.tinytable_css_kd5in3ddvihbvp19h23r { text-align: center; }
-      .table td.tinytable_css_d834gd1y1yakcoca2l6q, .table th.tinytable_css_d834gd1y1yakcoca2l6q { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_cyesgrciyjwdqqn8mtxb, .table th.tinytable_css_cyesgrciyjwdqqn8mtxb { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+.table td.tinytable_css_z77wt12j02dr4h4dsf3k, .table th.tinytable_css_z77wt12j02dr4h4dsf3k {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_m1krcvd13md3z4vc51vh, .table th.tinytable_css_m1krcvd13md3z4vc51vh {    text-align: left; }
+.table td.tinytable_css_0rhgxexgnbaagkrdb0uv, .table th.tinytable_css_0rhgxexgnbaagkrdb0uv {    text-align: center; }
+.table td.tinytable_css_17qql10qgne9bax5j0j1, .table th.tinytable_css_17qql10qgne9bax5j0j1 {    border-bottom: solid 0.05em black; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
     <div class="container">
-      <table class="table table-borderless" id="tinytable_wet96ek0v943ujvyuj6w" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_mtv06w4qf5z9dwo14v0u" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table ##. Ordinary Least Squares estimates of the relationship between the years of experience and average MHSE for Oregon teachers</caption>
               <tbody><tr>
@@ -1905,70 +1869,21 @@ Residuals    87 57.548 0.66147               </code></pre>
                   <td>R2         </td>
                   <td>0.009  </td>
                 </tr>
+                <tr>
+                  <td>F          </td>
+                  <td>0.430  </td>
+                </tr>
         </tbody>
       </table>
     </div>
-<!-- hack to avoid NA insertion in last line -->
-</div>
-</div>
-</section>
-<section id="plot-3" class="level1">
-<h1>Plot 3</h1>
-<div class="cell">
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Research question 3: is there a relationship between teacher mental health efficacy and burnout? X = mental health efficacy, Y = burnout, scatter plot + line</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>ggplotrq3 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(mean_mhl_id, sum_burnout)) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 3: Teacher Burnout by Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Burnout"</span>)<span class="sc">+</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_get</span>()</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>ggplotrq3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="624"></p>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OLS </span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sum_burnout <span class="sc">~</span> mean_mhl_id <span class="sc">+</span> school_level <span class="sc">+</span> yrs_combine <span class="sc">+</span> current_class, <span class="at">data=</span>final_data)</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit3, </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers"</span>,</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output-display">
-<!-- preamble start -->
 
     <script>
-
-      function styleCell_eghymzwl473b0gw2hio3(i, j, css_id) {
-          var table = document.getElementById("tinytable_eghymzwl473b0gw2hio3");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
+      function styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(i, j, css_id) {
+        var table = document.getElementById("tinytable_mtv06w4qf5z9dwo14v0u");
+        table.rows[i].cells[j].classList.add(css_id);
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_eghymzwl473b0gw2hio3');
+        var table = document.getElementById('tinytable_mtv06w4qf5z9dwo14v0u');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -1976,8 +1891,8 @@ Residuals    87 57.548 0.66147               </code></pre>
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_eghymzwl473b0gw2hio3(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_eghymzwl473b0gw2hio3");
+      function spanCell_tinytable_0tkzk0uj88bsxz1dtdb9(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_mtv06w4qf5z9dwo14v0u");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -2003,42 +1918,109 @@ Residuals    87 57.548 0.66147               </code></pre>
         targetCell.rowSpan = rowspan;
         targetCell.colSpan = colspan;
       }
-      // tinytable span after
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 12, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 15, j: 1 }, { i: 16, j: 1 }, { i: 17, j: 1 }, { i: 19, j: 1 },  ], css_id: 'tinytable_css_xu7mtd319pcxaa2ozo0j',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 12, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 16, j: 0 }, { i: 17, j: 0 }, { i: 19, j: 0 },  ], css_id: 'tinytable_css_wbe4rjgo71l9ubi9iyru',}, 
-          { positions: [ { i: 20, j: 1 },  ], css_id: 'tinytable_css_sj4i21x62wjcq1gsssky',}, 
-          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_q3jp3vy5ookasrj0qfjk',}, 
-          { positions: [ { i: 20, j: 0 },  ], css_id: 'tinytable_css_gqfg3fba87ikphea50mv',}, 
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_frp5ymw60xmdoxdekfwe',}, 
-          { positions: [ { i: 18, j: 0 },  ], css_id: 'tinytable_css_drnh020k4q5ki1zef5g9',}, 
-          { positions: [ { i: 18, j: 1 },  ], css_id: 'tinytable_css_bpyx49ay5zfgvoh3keva',}, 
-          ];
 
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  styleCell_eghymzwl473b0gw2hio3(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(0, 0, 'tinytable_css_z77wt12j02dr4h4dsf3k') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(0, 1, 'tinytable_css_z77wt12j02dr4h4dsf3k') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(0, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(1, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(2, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(3, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(4, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(5, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(6, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(7, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(8, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(9, 0, 'tinytable_css_m1krcvd13md3z4vc51vh') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(0, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(1, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(2, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(3, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(4, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(5, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(6, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(7, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(8, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(9, 1, 'tinytable_css_0rhgxexgnbaagkrdb0uv') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(6, 0, 'tinytable_css_17qql10qgne9bax5j0j1') })
+window.addEventListener('load', function () { styleCell_tinytable_0tkzk0uj88bsxz1dtdb9(6, 1, 'tinytable_css_17qql10qgne9bax5j0j1') })
     </script>
 
+  
+
+
+</div>
+</div>
+</section>
+<section id="plot-3" class="level1">
+<h1>Plot 3</h1>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Research question 3: is there a relationship between teacher mental health efficacy and burnout? X = mental health efficacy, Y = burnout, scatter plot + line</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>ggplotrq3 <span class="ot">&lt;-</span> final_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(mean_mhl_id, sum_burnout)) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>() <span class="sc">+</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Plot 3: Teacher Burnout by Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Mental Health Self-Efficacy"</span>) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Burnout"</span>)<span class="sc">+</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>)) <span class="sc">+</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_get</span>()</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>ggplotrq3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="624"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#OLS </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(sum_burnout <span class="sc">~</span> mean_mhl_id <span class="sc">+</span> school_level <span class="sc">+</span> yrs_combine <span class="sc">+</span> current_class, <span class="at">data=</span>final_data)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(fit3, </span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>             <span class="at">stars=</span>T,</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">fmt=</span><span class="dv">2</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">vcov =</span> <span class="st">"robust"</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>             <span class="at">gof_omit =</span> <span class="st">"Adj.|AIC|BIC|Log|RMSE|RSE|Std.Err"</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers"</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="at">notes=</span><span class="fu">c</span>(<span class="st">"Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+ 
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tinytable_dsz61sw5n35yp7rcuguc</title>
     <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_xu7mtd319pcxaa2ozo0j, .table th.tinytable_css_xu7mtd319pcxaa2ozo0j { text-align: center; }
-      .table td.tinytable_css_wbe4rjgo71l9ubi9iyru, .table th.tinytable_css_wbe4rjgo71l9ubi9iyru { text-align: left; }
-      .table td.tinytable_css_sj4i21x62wjcq1gsssky, .table th.tinytable_css_sj4i21x62wjcq1gsssky { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_q3jp3vy5ookasrj0qfjk, .table th.tinytable_css_q3jp3vy5ookasrj0qfjk { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_gqfg3fba87ikphea50mv, .table th.tinytable_css_gqfg3fba87ikphea50mv { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_frp5ymw60xmdoxdekfwe, .table th.tinytable_css_frp5ymw60xmdoxdekfwe { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_drnh020k4q5ki1zef5g9, .table th.tinytable_css_drnh020k4q5ki1zef5g9 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_bpyx49ay5zfgvoh3keva, .table th.tinytable_css_bpyx49ay5zfgvoh3keva { text-align: center; border-bottom: solid black 0.05em; }
+.table td.tinytable_css_c73goql69zf9zry0xhuj, .table th.tinytable_css_c73goql69zf9zry0xhuj {    border-bottom: solid 0.1em #d3d8dc; }
+.table td.tinytable_css_5zpvs0ctimmhm403zn83, .table th.tinytable_css_5zpvs0ctimmhm403zn83 {    text-align: left; }
+.table td.tinytable_css_vdg2zqtkr2q7knbxd7zv, .table th.tinytable_css_vdg2zqtkr2q7knbxd7zv {    text-align: center; }
+.table td.tinytable_css_75rxqimqii2ucwde45rw, .table th.tinytable_css_75rxqimqii2ucwde45rw {    border-bottom: solid 0.05em black; }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      },
+      svg: {
+        fontCache: 'global'
+      }
+    };
+    </script>
+  
+
+  
     <div class="container">
-      <table class="table table-borderless" id="tinytable_eghymzwl473b0gw2hio3" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_dsz61sw5n35yp7rcuguc" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers</caption>
               <tbody><tr>
@@ -2129,13 +2111,111 @@ Residuals    87 57.548 0.66147               </code></pre>
                   <td>R2                                 </td>
                   <td>0.133   </td>
                 </tr>
+                <tr>
+                  <td>F                                  </td>
+                  <td>1.957   </td>
+                </tr>
         </tbody>
       </table>
     </div>
-<!-- hack to avoid NA insertion in last line -->
+
+    <script>
+      function styleCell_tinytable_btypy3uo6nhkoantb8cn(i, j, css_id) {
+        var table = document.getElementById("tinytable_dsz61sw5n35yp7rcuguc");
+        table.rows[i].cells[j].classList.add(css_id);
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_dsz61sw5n35yp7rcuguc');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_tinytable_btypy3uo6nhkoantb8cn(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_dsz61sw5n35yp7rcuguc");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(0, 0, 'tinytable_css_c73goql69zf9zry0xhuj') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(0, 1, 'tinytable_css_c73goql69zf9zry0xhuj') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(0, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(1, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(2, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(3, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(4, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(5, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(6, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(7, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(8, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(9, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(10, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(11, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(12, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(13, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(14, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(15, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(16, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(17, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(18, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(19, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(20, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(21, 0, 'tinytable_css_5zpvs0ctimmhm403zn83') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(0, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(1, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(2, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(3, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(4, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(5, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(6, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(7, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(8, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(9, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(10, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(11, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(12, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(13, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(14, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(15, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(16, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(17, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(18, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(19, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(20, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(21, 1, 'tinytable_css_vdg2zqtkr2q7knbxd7zv') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(18, 0, 'tinytable_css_75rxqimqii2ucwde45rw') })
+window.addEventListener('load', function () { styleCell_tinytable_btypy3uo6nhkoantb8cn(18, 1, 'tinytable_css_75rxqimqii2ucwde45rw') })
+    </script>
+
+  
+
+
 </div>
 </div>
-<p><span class="citation" data-cites="sandwich">Zeileis, Köll, and Graham (<a href="#ref-sandwich" role="doc-biblioref">2020</a>)</span></p>
 
 </section>
 
@@ -2157,9 +2237,6 @@ Schwartz, Heather L, Michelle Bongard, Erin D Bogan, Alaina E Boyle, Duncan C Me
 </div>
 <div id="ref-stamm2009" class="csl-entry" role="listitem">
 Stamm, Beth Hudnall, and Charles R Figley. 2009. <span>“Advances in the Theory of Compassion Satisfaction and Fatigue and Its Measurement with the ProQOL 5.”</span>
-</div>
-<div id="ref-sandwich" class="csl-entry" role="listitem">
-Zeileis, Achim, Susanne Köll, and Nathaniel Graham. 2020. <span>“Various Versatile Variances: An Object-Oriented Implementation of Clustered Covariances in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 95 (1): 1–36. <a href="https://doi.org/10.18637/jss.v095.i01">https://doi.org/10.18637/jss.v095.i01</a>.
 </div>
 </div></section></div></main>
 <!-- /main column -->
