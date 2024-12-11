@@ -33,6 +33,7 @@ library(ggplot2)
 library(dplyr)
 library(ggridges)
 library(modelsummary)
+library(gt)
 
 ##All but nlme has been cited in the .bib document. If any more packages get used will need to add citation. -Suzie
 ```
@@ -231,6 +232,45 @@ trauma_hist <- ggplot(final_data, aes(x=sum_sectrauma)) +
   geom_histogram()
 
 trauma_hist
+```
+
+## Table 1
+
+```{r}
+
+final_data_clean_factor <- final_data %>%
+  select(age, race_eth, yrs_teach) %>%
+  mutate(across(everything(), as.character))
+ 
+
+# Pivot longer and calculate counts and percentages
+demo_tbl <- final_data_clean %>%
+  pivot_longer(
+    cols = everything(),
+    names_to = "variable",
+    values_to = "level"
+  ) %>%
+  group_by(variable, level) %>%
+  summarise(
+    count = n(),
+    percentage = n() / nrow(final_data_clean) * 100,
+    .groups = "drop"
+  )
+
+# Format table with gt, grouping rows by "variable"
+demo_tbl %>%
+  gt(groupname_col = "variable") %>%
+  cols_label(
+    level = "Level",
+    count = "Count",
+    percentage = "Percent (%)"
+  ) %>%
+  fmt_number(
+    columns = percentage,
+    decimals = 2
+  )
+
+
 ```
 
 # Plot 1
