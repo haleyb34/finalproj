@@ -1,26 +1,87 @@
-|                                                                     |
-|---------------------------------------------------------------------|
-| title: "Final Project"                                              |
-| author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke" |
-| format:                                                             |
-| html:                                                               |
-| toc: true                                                           |
-| toc-depth: 5                                                        |
-| toc-title: "Table of Contents"                                      |
-| code-fold: true                                                     |
-| code-summary: "Show the code"                                       |
-| editor: visual                                                      |
-| bibliography: references.bib                                        |
-| link-citations: true                                                |
-| execute:                                                            |
-| eval: true                                                          |
-| echo: true                                                          |
+---
+title: "Final Project"    
+subtitle: "EDLD 651"
+author: "Haley Brown, Sabine Scott, Suzie Stadelman, & Emily Wilke" 
+date: "December 11, 2024"
+abstract: "Suzie will put Emily's abstract here"
+format:                                                             
+  html:                                                               
+    toc: true                                                           
+    toc-depth: 5                                                        
+    toc-title: "Table of Contents"
+    execute:
+      eval: true
+      echo: true 
+      warning: false 
+      error: false                                    
+code-fold: true                                                     
+code-summary: "Show the code"                                       
+editor: visual                                                      
+bibliography: references.bib                                        
+link-citations: true                                                
+fig-width: 6.5
+fig-height: 8
+---
+
+# Writing
+
+### Introduction
+
+Concerningly, both teachers and students are facing mental health challenges [@agyapong2022; @cdc2023]. In attempts to promote student well being, social emotional learning has gained traction [@schwartz2022]. While teachers are being tasked with taking on increased responsibility to promote student mental health, little research has examined how equipped teachers feel to do this. Existing research suggests that teacher training in social-emotional learning and mental health is limited [@schiepe2021].
+
+With proper preparation and support, teachers have the potential to be impactful in preventative mental health support for students. For example, teachers already participate in screening for academic and behavioral challenges, especially with the expansion of multi-tiered systems of support (MTSS), and response to intervention frameworks. Thus, expanding these teacher-led screening procedures to include social-emotional well being could be beneficial. Moreover, schools serve as a centralized resource for connecting and referring families to other community resources. This study seeks to address gaps in the current research on teachers’ ability to support study social-emotional well being by assessing teachers’ self-efficacy in supporting students with mental health concerns.
+
+### Research Questions
+
+The current study aims to develop an understanding of teachers’ perceptions of their mental health self-efficacy (MHSE) and burnout. Specifically, we asked the following questions:
+
+1.  Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
+
+2.  Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?
+
+3.  Is there a relationship between teacher mental health efficacy and burnout?
+
+### Methods
+
+#### Participants and Recruitment
+
+Oregon K-12 teachers were recruited during Spring 2024 to complete an anonymous, online survey. The goal of this survey was to understand how Oregon teachers viewed their use of emotion regulation, well-being, and mental health self-efficacy in the classroom. Principals across Oregon were contacted and asked if they would be willing to share the survey with their teaching staff. The final sample consisted of 92 teachers. Teacher demographic data can be found in [Table 1: Demographic Data].
+
+#### Measures
+
+***School Mental Health Self-Efficacy Teacher Scale (SMH-SETS)***
+
+The School Mental Health Self-Efficacy Teacher Scale (SMH-SETS) is a 15-item measure that assesses teachers’ confidence in their ability to recognize, support, and refer students when they experience mental health concerns in the classroom [@brann2021]. Participants reported scores from strongly disagree (1) to strongly agree (6). Previous studies demonstrated that the SMH-SETS has acceptable reliability (Cronbach’s alpha = 0.91) and internal consistency ( = 0.93) [@brann2021].
+
+***Professional Quality of Life (ProQOL) Scale***
+
+The Professional Quality of Life (ProQOL) Scale measures positive and negative effects of working in a helping profession [@stamm2009]. This is a 30-item Likert-type scale, and participants rate questions from never (1) to very often (5). Items 1, 4, 15, 16, and 29 were reverse scored [@stamm2009]. For this study, the burnout subscale was calculated with items 1, 4, 8, 10, 15, 17, 19, 21, 26, and 29. Per the scoring manual, the average score on the burnout scale is 50 (SD= 10, alpha scale reliability =0.75).
+
+#### Data Analysis
+
+*Research Question 1: Do teacher reports of mental health self-efficacy differ by school type (i.e., elementary, middle, high school)?*
+
+We created a violin plot (see [Plot 1]) to visualize any differences of mental health self-efficacy by school type. Our null hypothesis was that in the population of Oregon K-12 teachers, there is no difference in reports of mental health self-efficacy between elementary, middle, and high school teachers. We tested our null hypothesis via an Analysis of Variance (ANOVA). We also were curious to understand the magnitude by which teachers in different school types differed from each other in their mental health self-efficacy. We conducted an Ordinary Least Squares (OLS) estimation for each school type, with elementary schools as the reference, to interpret the results.
+
+*Research Question 2: Is there a relationship between teacher years of experience and teacher reports of mental health self-efficacy?*
+
+We created a box plot (see [Plot 2]) to visualize any differences of teacher MHSE by years of teaching experience. We were curious to understand the magnitude by which teachers’ MHSE differed by their years of teaching experience. We conducted an OLS estimation for teachers by years of teaching experience, with 11+ years of experience as the reference, to interpret the results.
+
+*Research Question 3: Is there a relationship between teacher mental health efficacy and burnout?*
+
+We created a scatter plot (see [Plot 3]) to visualize any relationship between teacher MHSE and reported burnout. We were curious to understand whether there was a significant relationship between teacher MHSE and burnout, so we conducted an OLS estimation for teachers’ MHSE and burnout. We also included the following covariates into our model: school level, years of experience, current class (general or special education).
+
+### Results
+
+### Discussion
 
 # Code
 
-## 1. Load Packages
+## Load Packages
 
 ```{r}
+
+#|include: false
 
 library(Lahman)
 library(nlme)
@@ -34,28 +95,30 @@ library(dplyr)
 library(ggridges)
 library(modelsummary)
 library(gt)
+library(sandwich)
+library(kableExtra)
 
 ##All but nlme has been cited in the .bib document. If any more packages get used will need to add citation. -Suzie
 ```
 
-## 2. Read Data
+## Read Data
 
 ```{r}
 data <- import(here("data", "finalproj.csv")) %>%
   as_tibble()
 ```
 
-## 3. Data Cleaning
+## Data Cleaning
 
-### a. Demographics/Characteristics
+### Demographics/Characteristics
 
 ```{r}
 
 data$gender <- as.factor(data$gender)
-data$gender
+#data$gender
 
 data$age <- as.factor(data$age)
-data$age
+#data$age
 
 data <- data%>%
   mutate(id= row_number())
@@ -71,12 +134,11 @@ data <- data %>%
     .default ="Unknown"  # Change as necessary for unmatched values
   ))
 
-data
 ```
 
-### b. Measure Cleaning
+### Measure Cleaning
 
-#### i. Emotional Regulation Questionnaire (ERQ)
+#### Emotional Regulation Questionnaire (ERQ)
 
 ```{r}
 erq_data_recode <- data %>%
@@ -111,10 +173,9 @@ final_data <- pro_data_recode %>%
 final_data<- final_data %>%
   mutate(mean_mhl_id = ((mhl_1 + mhl_2 + mhl_3 + mhl_4 + mhl_5 + mhl_6 + mhl_7 + mhl_8 + mhl_9 + mhl_10 + mhl_11 + mhl_11 + mhl_12 + mhl_13 + mhl_14 + mhl_15)/15))
 
-final_data
 ```
 
-#### i. Professional Quality of Life Scale (ProQOL)
+#### Professional Quality of Life Scale (ProQOL)
 
 ```{r}
 #Step 1: Reversals
@@ -179,7 +240,6 @@ final_data <- final_data %>%
 
 # Step 3 Burnout 
 #add scores on 1, 4, 8, 10, 15, 17, 19, 21, 26, 29 
-final_data
 
 final_data <- final_data %>%
   mutate(sum_burnout = pro_1 + pro_4 + pro_8 + pro_10 + pro_15 + pro_17 + pro_19 + pro_21 + pro_26 + pro_29)
@@ -191,60 +251,87 @@ final_data <- final_data %>%
 final_data <- final_data %>%
   mutate(sum_sectrauma = pro_2 + pro_5 + pro_7 + pro_9 + pro_11 + pro_13 + pro_14 + pro_23 + pro_25 + pro_28)
 
-#step 5 frequency table and histogram for compassion
 
-frequency_table <- final_data %>%
-  count(sum_comp_satis) %>%
-  arrange(desc(n))
-frequency_table
-print(frequency_table)
-
-
-comp_hist <- ggplot(final_data, aes(x=sum_comp_satis)) +
-  geom_histogram()
-
-comp_hist
-
-#step 6 frequency table and histogram for burnout
-
-frequency_table_2 <- final_data %>%
-  count(sum_burnout) %>%
-  arrange(desc(n))
-frequency_table_2
-print(frequency_table_2)
-
-
-burnout_hist <- ggplot(final_data, aes(x=sum_burnout)) +
-  geom_histogram()
-
-burnout_hist
-
-#step 7 frequency table and histogram for trauma 
-
-frequency_table_3 <- final_data %>%
-  count(sum_sectrauma) %>%
-  arrange(desc(n))
-frequency_table_3
-print(frequency_table_3)
-
-
-trauma_hist <- ggplot(final_data, aes(x=sum_sectrauma)) +
-  geom_histogram()
-
-trauma_hist
 ```
 
-## Table 1
+## Data Inspection using Frequency Tables and Historgrams
 
 ```{r}
 
-final_data_clean_factor <- final_data %>%
-  select(age, race_eth, yrs_teach) %>%
-  mutate(across(everything(), as.character))
- 
+#Compassion: frequency table and histogram
 
+final_data %>%
+  count(sum_comp_satis) %>%
+  arrange(desc(n)) %>%
+  kable(caption = "Frequency Table of Compassion Satisfaction",
+        col.names = c("Compassion Satisfaction Score", "Count"))
+
+
+comp_hist <- ggplot(final_data, aes(x=sum_comp_satis)) +
+  geom_histogram(color= "gold4", fill= "darkgoldenrod1") +
+  labs(x = "Compassion Satisfaction Score",
+       y = "Count",
+       title = "Histogram of Compassion Satisfaction",
+       subtitle= "From the ProQOL Measure")
+
+comp_hist
+
+#Burnout: frequency table and histogram
+
+final_data %>%
+  count(sum_burnout) %>%
+  arrange(desc(n)) %>%
+  kable(caption = "Frequency Table of Burnout",
+        col.names = c("Burnout Score", "Count"))
+
+burnout_hist <- ggplot(final_data, aes(x=sum_burnout)) +
+  geom_histogram(color= "darkolivegreen", fill= "darkolivegreen1") +
+  labs(x = "Burnout Score",
+       y = "Count",
+       title = "Histogram of Burnout",
+       subtitle= "From the ProQOL Measure")
+
+burnout_hist
+
+#Sec Trauma: frequency table and histogram
+
+final_data %>%
+  count(sum_sectrauma) %>%
+  arrange(desc(n)) %>%  
+  kable(caption = "Frequency Table of Secondary Traumatic Stress",
+        col.names = c("Secondary Traumatic Stress Score", "Count"))
+
+
+trauma_hist <- ggplot(final_data, aes(x=sum_sectrauma)) +
+  geom_histogram(color= "deeppink4", fill= "deeppink") +
+  labs(x = "Secondary Traumatic Stress Score",
+       y = "Count",
+       title = "Histogram of Secondary Traumatic Stress",
+       subtitle= "From the ProQOL Measure")
+
+trauma_hist
+
+```
+
+# Table 1: Demographic Data
+
+```{r}
+
+#| label: table-1
+
+final_data_clean_factor <- final_data %>%
+  select(age, race_eth, yrs_teach, current_class) %>%
+    rename(
+    "Age" = "age",
+    "Race/Ethnicity" = "race_eth",
+    "Years of Teaching Experience" = "yrs_teach",
+    "Current Classroom Type" = "current_class"
+  ) %>%
+  mutate(across(everything(), as.character))
+
+ 
 # Pivot longer and calculate counts and percentages
-demo_tbl <- final_data_clean %>%
+demo_tbl <- final_data_clean_factor %>%
   pivot_longer(
     cols = everything(),
     names_to = "variable",
@@ -253,7 +340,7 @@ demo_tbl <- final_data_clean %>%
   group_by(variable, level) %>%
   summarise(
     count = n(),
-    percentage = n() / nrow(final_data_clean) * 100,
+    percentage = n() / nrow(final_data_clean_factor) * 100,
     .groups = "drop"
   )
 
@@ -261,14 +348,26 @@ demo_tbl <- final_data_clean %>%
 demo_tbl %>%
   gt(groupname_col = "variable") %>%
   cols_label(
-    level = "Level",
+    level = "",
     count = "Count",
     percentage = "Percent (%)"
   ) %>%
   fmt_number(
     columns = percentage,
     decimals = 2
-  )
+  ) %>%
+  tab_header(
+    title = md("Table 1: Demographic Data")
+  ) %>%
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_title()) %>%
+  tab_style(style = cell_text(weight = "bold"),
+            locations = cells_column_labels()) %>%
+     tab_style(
+       style = cell_fill(color = "ivory"),
+       locations = cells_body()
+     )
+ 
 
 
 ```
@@ -281,29 +380,27 @@ demo_tbl %>%
 #Do teacher reports of mental health efficacy differ by school type (i.e., elementary, middle, high school)? 
 
 #There are 4 answer options on this question (Elementary, K-8, Middle, and High School), plus an other option.  
-table(final_data$school_level)
+#table(final_data$school_level)
 
 
 #Six people wrote in answers. 4 said K-12, 1 said 6-8 school, and 1 said middle and high school. We could create a new category for K-12. I would feel comfortable putting the 6-8 person in the middle school category, and not sure what we'd want to do for the middle and high school. For now, I'm not going to include the "Other" option in the plot. 
-table(final_data$school_level_other)
+
+#table(final_data$school_level_other)
 
 ##I would like to rearrange the y-axis to be in order of level: Elementary, K-8, Middle, then High School. If you know how to do that, let me know! -Suzie
 
 ##Also there is one N/A for the mean mhl score, wondering if I need to add a na.rm somewhere? Lastly, I am getting a warning and I'm guessing that's what it's from. 
 
-plot1 <- final_data %>%
-  filter(school_level != "Other (Please Specify)") %>%
-  select(school_level, mean_mhl_id) %>%
-  ggplot(aes(x = mean_mhl_id, y= school_level)) +
-  geom_density_ridges(fill = "lightblue", alpha = .7) +
-  labs(x= "Mental Health  Self-Efficacy Score",
-       y= "School Level",
-       title = "Figure 1",
-       subtitle = "Teacher Mental Health Self-Efficacy by School Level") +
-  theme_get()
-  
-         
-plot1
+#plot1 <- final_data %>%
+  #filter(school_level != "Other (Please Specify)") %>%
+  #select(school_level, mean_mhl_id) %>%
+  #ggplot(aes(x = mean_mhl_id, y= school_level)) +
+  #geom_density_ridges(fill = "lightblue", alpha = .7) +
+  #labs(x= "Mental Health  Self-Efficacy Score",
+       #y= "School Level",
+       #title = "Figure 1",
+       #subtitle = "Teacher Mental Health Self-Efficacy by School Level") +
+  #theme_get()
 
 #final_data %>%
   #ggplot(aes(school_type, mean_mhl_id) +
@@ -318,15 +415,16 @@ final_data <- final_data %>%
         "High School" = c("High School"))) 
 
 ggplotrq1 <- final_data %>%
-  ggplot(aes(y = mean_mhl_id, x = school_level, color = school_level, fill = school_level)) +
+  ggplot(aes(y = mean_mhl_id, x = school_level, fill = school_level)) +
   geom_violin() +
   stat_summary(fun="median",
                geom = "crossbar",
                width = 0.5,
                colour = "red") +
-  ggtitle("Teacher Mental Health Self-Efficacy \n by School Level") +
+  ggtitle("Plot 1: Teacher Mental Health Self-Efficacy \n by School Level") +
   xlab("Years of Experience") +
   ylab("Mental Health Efficacy") +
+  labs(color = "School Level") +
   theme_minimal() +
   theme(plot.title = element_text(hjust = 0.5))
 
@@ -360,7 +458,7 @@ ggplotrq2 <- final_data %>%
   mutate(yrs_combine = factor(yrs_combine, levels = c("0-5 years", "6-10 years", "11+ years"))) %>%
   ggplot() +
   geom_boxplot(aes(y = mean_mhl_id, x = yrs_combine)) +
-  ggtitle("Teacher Mental Health Self-Efficacy \n by Years of Teaching Experience") +
+  ggtitle("Plot 2: Teacher Mental Health Self-Efficacy \n by Years of Teaching Experience") +
   xlab("Years of Experience") +
   ylab("Mental Health Self-Efficacy") +
   theme_minimal() +
@@ -396,10 +494,11 @@ ggplotrq3 <- final_data %>%
   ggplot(aes(mean_mhl_id, sum_burnout)) +
   geom_point() +
   geom_smooth() +
-  ggtitle("Teacher Burnout by Mental Health Self-Efficacy") +
+  ggtitle("Plot 3: Teacher Burnout by Mental Health Self-Efficacy") +
   xlab("Mental Health Self-Efficacy") +
   ylab("Burnout")+
-  theme(plot.title = element_text(hjust = 0.5))
+  theme(plot.title = element_text(hjust = 0.5)) +
+  theme_get()
 
 ggplotrq3
 
@@ -415,37 +514,3 @@ modelsummary(fit3,
 title = "Table ##. Ordinary Least Squares estimates of the relationship between teacher MHSE and burnout for Oregon teachers",
 notes=c("Cells report coefficients and heteroscedastic-robust standard errors in parentheses. Each observation is one teacher"))
 ```
-
-Research Questions (as reference)
-
-1.  Do teacher reports of mental health efficacy differ by school level (i.e., elementary, middle, high school)? 
-
-2.  Is there a relationship between teacher years of experience and teacher reports of mental health efficacy?
-
-3.  Is there a relationship between teacher mental health efficacy and burnout?
-
-Test
-
-# Writing
-
-### Abstract
-
-### Introduction
-
-### Methods
-
-### Results
-
-### Discussion
-
-#### Reference Notes
-
-here is one reference [@r]
-
-here is another one @here
-
-cite ERQ
-
-cite ProQOL
-
-cite nlme package
